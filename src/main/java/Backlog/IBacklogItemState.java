@@ -4,7 +4,7 @@ import exceptions.ChangeBacklogStateException;
 
 public interface IBacklogItemState {
     void changeToToDoState() throws ChangeBacklogStateException;
-    void changeToDoingState();
+    void changeToDoingState() throws ChangeBacklogStateException;
     void changeToReadyForTestingState() throws ChangeBacklogStateException;
     void changeToTestingState() throws ChangeBacklogStateException;
     void changeToTestedState() throws ChangeBacklogStateException;

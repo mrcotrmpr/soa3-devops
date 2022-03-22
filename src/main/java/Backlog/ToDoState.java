@@ -22,21 +22,21 @@ public class ToDoState implements IBacklogItemState {
 
     @Override
     public void changeToReadyForTestingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form ToDo to ReadyForTesting!");
+        throw new ChangeBacklogStateException("Can't change from ToDo to ReadyForTesting!");
     }
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form ToDo to Testing!");
+        throw new ChangeBacklogStateException("Can't change from ToDo to Testing!");
     }
 
     @Override
     public void changeToTestedState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form ToDo to Tested!");
+        throw new ChangeBacklogStateException("Can't change from ToDo to Tested!");
     }
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form ToDo to ReadyForTesting!");
+        throw new ChangeBacklogStateException("Can't change from ToDo to ReadyForTesting!");
     }
 }
