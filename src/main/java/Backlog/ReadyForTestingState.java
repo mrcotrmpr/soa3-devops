@@ -5,16 +5,16 @@ import exceptions.ChangeBacklogStateException;
 public class ReadyForTestingState implements IBacklogItemState {
 
 
-    public Backlog context;
+    private BacklogItem _backlogItem;
 
-    public ReadyForTestingState(Backlog context) {
-        this.context = context;
+    public ReadyForTestingState(BacklogItem context) {
+        this._backlogItem = context;
     }
 
     @Override
     public void changeToToDoState()  {
         //TODO: F20 Als scrum master wil ik een notificatie krijgen als een backlog item van Ready for testing naar Todo wordt verplaatst zodat ik hiernaar kan handelen
-        this.context.setState(new ToDoState(this.context));
+        this._backlogItem.setState(new ToDoState(this._backlogItem));
     }
 
     @Override
@@ -31,12 +31,12 @@ public class ReadyForTestingState implements IBacklogItemState {
 
     @Override
     public void changeToTestingState() {
-        this.context.setState(new TestingState(this.context));
+        this._backlogItem.setState(new TestingState(this._backlogItem));
     }
 
     @Override
     public void changeToTestedState() {
-            this.context.setState(new TestedState(this.context));
+            this._backlogItem.setState(new TestedState(this._backlogItem));
     }
 
     @Override

@@ -4,15 +4,15 @@ import exceptions.ChangeBacklogStateException;
 
 public class TestingState implements IBacklogItemState {
 
-    public Backlog context;
+    private BacklogItem _backlogItem;
 
-    public TestingState(Backlog context) {
-        this.context = context;
+    public TestingState(BacklogItem context) {
+        this._backlogItem = context;
     }
 
     @Override
     public void changeToToDoState() {
-        this.context.setState(new ToDoState(this.context));
+        this._backlogItem.setState(new ToDoState(this._backlogItem));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TestingState implements IBacklogItemState {
 
     @Override
     public void changeToTestedState() {
-        this.context.setState(new TestedState(this.context));
+        this._backlogItem.setState(new TestedState(this._backlogItem));
     }
 
     @Override

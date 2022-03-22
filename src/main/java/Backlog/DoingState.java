@@ -4,10 +4,10 @@ import exceptions.ChangeBacklogStateException;
 
 public class DoingState implements IBacklogItemState {
 
-    public Backlog context;
+    private BacklogItem _backlogItem;
 
-    public DoingState(Backlog context) {
-        this.context = context;
+    public DoingState(BacklogItem context) {
+        this._backlogItem = context;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class DoingState implements IBacklogItemState {
     @Override
     public void changeToReadyForTestingState() {
         //TODO: F13 Als tester wil ik een notificatie krijgen als een backlog item in de fase Ready for testing komt zodat ik weet wanneer ik moet gaan testen
-        this.context.setState(new ReadyForTestingState(this.context));
+        this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
 
     }
 

@@ -4,15 +4,15 @@ import exceptions.ChangeBacklogStateException;
 
 public class DoneState implements IBacklogItemState {
 
-    public Backlog context;
+    private BacklogItem _backlogItem;
 
-    public DoneState(Backlog context) {
-        this.context = context;
+    public DoneState(BacklogItem context) {
+        this._backlogItem = context;
     }
 
     @Override
     public void changeToToDoState() {
-        this.context.setState(new ToDoState(this.context));
+        this._backlogItem.setState(new ToDoState(this._backlogItem));
     }
 
     @Override
