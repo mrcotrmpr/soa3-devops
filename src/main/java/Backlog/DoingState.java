@@ -9,6 +9,11 @@ public class DoingState implements IBacklogItemState {
     }
 
     @Override
+    public void changeToToDoState() {
+
+    }
+
+    @Override
     public void changeToDoingState() {
 
     }

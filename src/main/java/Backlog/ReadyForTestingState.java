@@ -10,8 +10,12 @@ public class ReadyForTestingState implements IBacklogItemState {
     }
 
     @Override
-    public void changeToDoingState() {
+    public void changeToToDoState() {
 
+    }
+
+    @Override
+    public void changeToDoingState() {
 
     }
 

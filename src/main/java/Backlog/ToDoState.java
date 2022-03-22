@@ -1,5 +1,7 @@
 package Backlog;
 
+import exceptions.ChangeBacklogStateException;
+
 public class ToDoState implements IBacklogItemState {
 
     public Backlog context;
@@ -9,27 +11,32 @@ public class ToDoState implements IBacklogItemState {
     }
 
     @Override
+    public void changeToToDoState() throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException("Can't change from ToDo to ToDo");
+    }
+
+    @Override
     public void changeToDoingState() {
-
+        context.setState(new DoingState(this.context));
     }
 
     @Override
-    public void changeToReadyForTestingState() {
-
+    public void changeToReadyForTestingState() throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException("Can't change form ToDo to ReadyForTesting!");
     }
 
     @Override
-    public void changeToTestingState() {
-
+    public void changeToTestingState() throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException("Can't change form ToDo to Testing!");
     }
 
     @Override
-    public void changeToTestedState() {
-
+    public void changeToTestedState() throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException("Can't change form ToDo to Tested!");
     }
 
     @Override
-    public void changeToDoneState() {
-
+    public void changeToDoneState() throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException("Can't change form ToDo to ReadyForTesting!");
     }
 }
