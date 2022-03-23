@@ -3,6 +3,7 @@ package Project;
 import Account.Account;
 import Backlog.Backlog;
 import Sprint.ISprint;
+import exceptions.ProjectContributersException;
 
 import java.util.ArrayList;
 
@@ -23,12 +24,12 @@ public class Project {
         this.name = name;
     }
 
-    public void enrollProject(Account account){
+    public void enrollProject(Account account) throws ProjectContributersException {
         if(!this.contributors.contains(account)){
             this.contributors.add(account);
         }else
         {
-
+            throw new ProjectContributersException("Contributor already takes part in this project!");
         }
     }
 
