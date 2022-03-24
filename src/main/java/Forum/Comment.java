@@ -5,8 +5,8 @@ import Account.Account;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Comment extends ForumCompositeComponent {
-    public ArrayList<ForumComponent> comments;
+public class Comment {
+
     private String text;
     private Account author;
     private Date date;
@@ -17,11 +17,14 @@ public class Comment extends ForumCompositeComponent {
         this.date = date;
     }
 
-    @Override
-    public void acceptVisitor(ForumVisitor visitor) {
-        visitor.visitComment(this);
-        super.acceptVisitor(visitor);
+
+    public String getText() {
+        return text;
     }
 
+    //TODO: get author from account when finished
 
+    public Date getDate() {
+        return date;
+    }
 }
