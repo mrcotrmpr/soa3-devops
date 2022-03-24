@@ -17,6 +17,6 @@ public class PrintVisitor extends Visitor {
 
     @Override
     public void visitCommand(Command command) {
-        System.out.println("execute" + command.getCodeLine());
+        System.out.println("execute " + command.getCodeLine()+ ".....");
     }
 }
