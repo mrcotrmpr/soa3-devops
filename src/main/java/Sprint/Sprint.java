@@ -1,15 +1,18 @@
 package Sprint;
 
 import Account.Account;
+import Backlog.Backlog;
 import Backlog.BacklogItem;
 import Project.Project;
+import Sprint.States.ISprintState;
+import Sprint.States.InitialState;
 
 import java.util.Date;
 import java.util.List;
 
-public class ReviewSprint implements ISprint{
+public class Sprint {
 
-    public List<BacklogItem> backlogItems;
+    public Backlog backlog;
     public Account scrumMaster;
     public Account productOwner;
     public List<Account> developers;
@@ -17,10 +20,10 @@ public class ReviewSprint implements ISprint{
     public Project project;
     public Date startTime;
     public Date endTime;
-    public IExportBehavior exportBehavior;
+    public ISprintState state;
 
-    public ReviewSprint(List<BacklogItem> backlogItems, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime, IExportBehavior exportBehavior) {
-        this.backlogItems = backlogItems;
+    public Sprint(Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime) {
+        this.backlog = backlog;
         this.scrumMaster = scrumMaster;
         this.productOwner = productOwner;
         this.developers = developers;
@@ -28,61 +31,55 @@ public class ReviewSprint implements ISprint{
         this.project = project;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.exportBehavior = exportBehavior;
+        this.state = new InitialState(this);
     }
 
-    @Override
     public List<BacklogItem> getBacklogItems() {
-        return this.backlogItems;
+        return this.backlog.getBacklogItems();
     }
 
-    @Override
     public Account getScrumMaster() {
         return this.scrumMaster;
     }
 
-    @Override
     public Account getProductOwner() {
         return this.productOwner;
     }
 
-    @Override
     public List<Account> getDevelopers() {
         return this.developers;
     }
 
-    @Override
     public List<Account> getTesters() {
         return this.testers;
     }
 
-    @Override
     public Project getProject() {
         return this.project;
     }
 
-    @Override
     public Date getStartTime() {
         return this.startTime;
     }
 
-    @Override
     public Date getEndTime() {
         return this.endTime;
     }
 
-    @Override
     public void addTester(Account account) {
         this.testers.add(account);
     }
 
-    @Override
     public void addDeveloper(Account account) {
         this.developers.add(account);
     }
 
-    @Override
-    public void export(SprintExportFormat sprintExportFormat) {
-        this.exportBehavior.export(sprintExportFormat);
+    public void setState(ISprintState state) {
+        this.state = state;
     }
+
+    public Class<? extends ISprintState> getState(){
+        return this.state.getClass();
+    }
+
 }

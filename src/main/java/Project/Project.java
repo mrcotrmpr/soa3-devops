@@ -2,7 +2,7 @@ package Project;
 
 import Account.Account;
 import Backlog.Backlog;
-import Sprint.ISprint;
+import Sprint.Sprint;
 
 import java.util.ArrayList;
 
@@ -10,14 +10,13 @@ public class Project {
     public Backlog projectBacklog;
     //    public Forum forum
     public Account productOwner;
-    public ArrayList<ISprint> sprints;
+    public ArrayList<Sprint> sprints;
     public String name;
 
     public Project(Backlog projectBacklog, Account productOwner, String name) {
         this.projectBacklog = projectBacklog;
         this.productOwner = productOwner;
-        this.sprints = new ArrayList<ISprint>();
-
+        this.sprints = new ArrayList<Sprint>();
         this.name = name;
     }
 
@@ -25,14 +24,14 @@ public class Project {
         return productOwner;
     }
 
-    public ArrayList<ISprint> getSprints() {
+    public ArrayList<Sprint> getSprints() {
         return sprints;
     }
 
     public String getName() {
         return name;
     }
-    public void addSprints(ISprint sprint){
+    public void addSprints(Sprint sprint){
         this.sprints.add(sprint);
     }
 }
