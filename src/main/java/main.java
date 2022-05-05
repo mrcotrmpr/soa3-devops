@@ -1,9 +1,12 @@
 import Account.*;
 import Backlog.Backlog;
 import Notification.*;
+import PipeLine.PipeLine;
 import PipeLine.PipeLineManager;
 import Project.Project;
-import Sprint.Sprint;
+import Sprint.*;
+import Sprint.States.*;
+import exceptions.ChangeSprintStateException;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -13,7 +16,7 @@ import java.util.Date;
 
 class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ChangeSprintStateException {
 
         Backlog backlog = new Backlog();
 
@@ -25,10 +28,20 @@ class main {
 
         Project project = new Project(backlog, productOwner, "Project 1");
 
+        PipeLine pipeLine = new PipeLine("Name");
+
         Date date = new Date();
-        Sprint testSprint = new Sprint(backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+        SprintType release = SprintType.Release;
+        SprintType review = SprintType.Review;
+
+        Sprint testSprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+        testSprint.addPipeline(pipeLine);
 
         System.out.println(testSprint.getState());
+        testSprint.state.changeToInProgressState();
+
+        System.out.println(testSprint.getState());
+
 
     }
 }
