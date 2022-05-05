@@ -1,6 +1,6 @@
 package Sprint.States;
 
-import Sprint.Sprint;
+import Sprint.*;
 import exceptions.ChangeSprintStateException;
 
 public class FinishedState implements ISprintState {
@@ -27,13 +27,21 @@ public class FinishedState implements ISprintState {
     }
 
     @Override
-    public void changeToReleasingState() {
-        this.sprint.setState(new ReleasingState(this.sprint));
+    public void changeToReleasingState() throws ChangeSprintStateException {
+        if(this.sprint.getType() == SprintType.Release) {
+            this.sprint.setState(new ReleasingState(this.sprint));
+        } else {
+            throw new ChangeSprintStateException("Can't release a review sprint");
+        }
     }
 
     @Override
-    public void changeToReleaseCancelledState() {
-        this.sprint.setState(new ReleaseCancelledState(this.sprint));
+    public void changeToReleaseCancelledState() throws ChangeSprintStateException {
+        if(this.sprint.getType() == SprintType.Release) {
+            this.sprint.setState(new ReleaseCancelledState(this.sprint));
+        } else {
+            throw new ChangeSprintStateException("Can't cancel a review sprint");
+        }
     }
 
     @Override

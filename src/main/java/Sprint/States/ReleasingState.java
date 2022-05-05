@@ -3,7 +3,7 @@ package Sprint.States;
 import Sprint.Sprint;
 import exceptions.ChangeSprintStateException;
 
-public class ReleasingState implements ISprintState{
+public class ReleasingState implements ISprintState {
 
     private Sprint sprint;
 
@@ -37,14 +37,14 @@ public class ReleasingState implements ISprintState{
     }
 
     @Override
-    public void changeToReleaseErrorState() {
-        // TODO: logic for pipeline
+    public void changeToReleaseErrorState() throws InterruptedException {
+        this.sprint.pipeLineManager.executePipeLineByName(this.sprint.getPipeline().getPipeLineName());
         this.sprint.setState(new ReleaseErrorState(this.sprint));
     }
 
     @Override
-    public void changeToReleaseSuccessState() {
-        // TODO: logic for pipeline
+    public void changeToReleaseSuccessState() throws InterruptedException {
+        this.sprint.pipeLineManager.executePipeLineByName(this.sprint.getPipeline().getPipeLineName());
         this.sprint.setState(new ReleaseSuccessState(this.sprint));
     }
 

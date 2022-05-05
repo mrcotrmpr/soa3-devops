@@ -18,7 +18,16 @@ public class PipeLineManager implements Publisher {
         this.pipeLines.add(generateDefaultDeployPipeLine());
     }
 
-    public void executePipeLineByName(String name){
+    public PipeLine getPipeline(int index) {
+        return this.pipeLines.get(index);
+    }
+
+    public void addNewPipeline(PipeLine pipeLine) {
+        this.pipeLines.add(pipeLine);
+    }
+
+    public void executePipeLineByName(String name) throws InterruptedException {
+        Thread.sleep(2000);
         for(PipeLine p : pipeLines){
             if(p.getPipeLineName().equals(name)){
                 p.acceptVisitor(new PrintVisitor());
@@ -30,7 +39,7 @@ public class PipeLineManager implements Publisher {
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
 
     private PipeLine generateBasePipeLine(String name){
-        PipeLine pipeLine = new PipeLine(name);
+        PipeLine pipeLine = new PipeLine(name, false);
 
         Stage stage1 = new Stage("source");
         Command command1 = new Command("source");
