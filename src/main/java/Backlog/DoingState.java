@@ -22,8 +22,9 @@ public class DoingState implements IBacklogItemState {
 
     @Override
     public void changeToReadyForTestingState() {
-        //TODO: F13 Als tester wil ik een notificatie krijgen als een backlog item in de fase Ready for testing komt zodat ik weet wanneer ik moet gaan testen
         this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
+
+        this._backlogItem.notifySpecificSubscribers("Tester");
 
     }
 

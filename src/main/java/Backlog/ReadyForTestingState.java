@@ -13,8 +13,8 @@ public class ReadyForTestingState implements IBacklogItemState {
 
     @Override
     public void changeToToDoState()  {
-        //TODO: F20 Als scrum master wil ik een notificatie krijgen als een backlog item van Ready for testing naar Todo wordt verplaatst zodat ik hiernaar kan handelen
         this._backlogItem.setState(new ToDoState(this._backlogItem));
+        this._backlogItem.notifySpecificSubscribers("ScrumMaster");
     }
 
     @Override

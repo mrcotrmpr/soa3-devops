@@ -1,9 +1,13 @@
 package Backlog;
 
+import Account.Account;
 import Account.Developer;
+import Notification.Subscriber;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BacklogItem {
 
@@ -15,6 +19,8 @@ public class BacklogItem {
     public Developer assignedTo;
 
     public IBacklogItemState state;
+
+    public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
     public BacklogItem(String description, int value, int estimate, int priority) {
         this.description = description;
@@ -45,6 +51,7 @@ public class BacklogItem {
     public Activity getActivity(int index) {
         return activities.get(index);
     }
+
     public boolean activitiesDone() {
         for (Activity activity : activities) {
             if (!activity.getDone()) {
@@ -92,5 +99,22 @@ public class BacklogItem {
     }
     public Class<? extends IBacklogItemState> getCurrentState(){
         return this.state.getClass();
+    }
+
+    public void subscribe(Account account, Subscriber s) {
+        this.subscribers.put(account, s);
+    }
+
+    public void unsubscribe(Account account) {
+        this.subscribers.remove(account);
+    }
+
+    public void notifySpecificSubscribers(String accountTypes) {
+
+        for (Map.Entry<Account, Subscriber> entry : subscribers.entrySet()) {
+            if(entry.getKey().getClass().getSimpleName().equals(accountTypes)){
+                entry.getValue().update();
+            }
+        }
     }
 }

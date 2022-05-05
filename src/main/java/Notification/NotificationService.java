@@ -6,11 +6,9 @@ import PipeLine.PipeLineManager;
 public class NotificationService implements Subscriber {
 
     public INotifier notifier;
-    PipeLineManager pipeLineManager;
 
-    public NotificationService(INotifier notifier, PipeLineManager pipeLineManager) {
+    public NotificationService(INotifier notifier) {
         this.notifier = notifier;
-        this.pipeLineManager = pipeLineManager;
     }
 
     public void sendNotification() {
