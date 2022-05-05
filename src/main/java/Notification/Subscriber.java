@@ -1,5 +1,5 @@
 package Notification;
 
 public interface Subscriber {
-    void update();
+    void update(String message);
 }

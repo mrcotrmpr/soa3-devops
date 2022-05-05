@@ -1,8 +1,5 @@
 package Notification;
 
-
-import PipeLine.PipeLineManager;
-
 public class NotificationService implements Subscriber {
 
     public INotifier notifier;
@@ -11,12 +8,12 @@ public class NotificationService implements Subscriber {
         this.notifier = notifier;
     }
 
-    public void sendNotification() {
-        this.notifier.sendNotification();
+    public void sendNotification(String message) {
+        this.notifier.sendNotification(message);
     }
 
-    public void update() {
-        sendNotification();
+    public void update(String message) {
+        sendNotification(message);
     }
 
 }

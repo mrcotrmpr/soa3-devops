@@ -109,11 +109,11 @@ public class BacklogItem {
         this.subscribers.remove(account);
     }
 
-    public void notifySpecificSubscribers(String accountTypes) {
+    public void notifySpecificSubscribers(String accountTypes, String message) {
 
         for (Map.Entry<Account, Subscriber> entry : subscribers.entrySet()) {
             if(entry.getKey().getClass().getSimpleName().equals(accountTypes)){
-                entry.getValue().update();
+                entry.getValue().update(message);
             }
         }
     }

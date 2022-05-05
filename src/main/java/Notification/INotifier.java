@@ -1,5 +1,5 @@
 package Notification;
 
 public interface INotifier {
-    void sendNotification();
+    void sendNotification(String message);
 }

@@ -60,6 +60,9 @@ class main {
 
         Sprint testSprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
 
+        INotifier notifier = new SlackNotify();
+        Subscriber s = new NotificationService(notifier);
+        testSprint.subscribe(productOwner, s);
 
         // States
 
@@ -71,16 +74,8 @@ class main {
         testSprint.state.changeToFinishedState();
         System.out.println(testSprint.getState());
 
-        testSprint.state.changeToReleasingState();
+        testSprint.state.changeToReleaseCancelledState();
         System.out.println(testSprint.getState());
 
-        testSprint.state.changeToReleaseErrorState();
-        System.out.println(testSprint.getState());
-
-        testSprint.state.changeToReleasingState();
-        System.out.println(testSprint.getState());
-
-        testSprint.state.changeToReleaseSuccessState();
-        System.out.println(testSprint.getState());
     }
 }

@@ -2,8 +2,9 @@ package Notification;
 
 public class MailLib {
 
-    public void sendMail() {
-        System.out.println("Import package... mail sent!");
+    public void sendMail(String message) {
+        System.out.println("Import package...");
+        System.out.println("Sending mail: " + message);
     }
 
 }

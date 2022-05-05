@@ -79,9 +79,9 @@ public class PipeLineManager implements Publisher {
         this.subscribers.remove(s);
     }
 
-    public void notifySubscribers() {
+    public void notifySubscribers(String message) {
         for(Subscriber s : subscribers){
-            s.update();
+            s.update(message);
         }
     }
 }

@@ -14,7 +14,7 @@ public class ReadyForTestingState implements IBacklogItemState {
     @Override
     public void changeToToDoState()  {
         this._backlogItem.setState(new ToDoState(this._backlogItem));
-        this._backlogItem.notifySpecificSubscribers("ScrumMaster");
+        this._backlogItem.notifySpecificSubscribers("ScrumMaster", "Change from ready to testing to doing");
     }
 
     @Override

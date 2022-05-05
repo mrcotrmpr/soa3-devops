@@ -8,7 +8,8 @@ public class MailNotify implements INotifier{
         this.adaptor = new MailLib();
     }
 
-    public void sendNotification() {
-        adaptor.sendMail();
+    @Override
+    public void sendNotification(String message) {
+        adaptor.sendMail(message);
     }
 }
