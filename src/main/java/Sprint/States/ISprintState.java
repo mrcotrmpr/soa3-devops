@@ -8,7 +8,7 @@ public interface ISprintState {
     void changeToFinishedState() throws ChangeSprintStateException;
     void changeToReleasingState() throws ChangeSprintStateException;
     void changeToReleaseCancelledState() throws ChangeSprintStateException;
-    void changeToReleaseErrorState() throws ChangeSprintStateException;
-    void changeToReleaseSuccessState() throws ChangeSprintStateException;
+    void changeToReleaseErrorState() throws ChangeSprintStateException, InterruptedException;
+    void changeToReleaseSuccessState() throws ChangeSprintStateException, InterruptedException;
     void changeToReviewedState() throws ChangeSprintStateException;
 }

@@ -4,6 +4,7 @@ import Account.Account;
 import Backlog.Backlog;
 import Backlog.BacklogItem;
 import PipeLine.PipeLine;
+import PipeLine.PipeLineManager;
 import Project.Project;
 import Report.Report;
 import Sprint.States.ISprintState;
@@ -24,7 +25,7 @@ public class Sprint {
     public Project project;
     public Date startTime;
     public Date endTime;
-    public PipeLine pipeLine;
+    public PipeLineManager pipeLineManager;
     public ISprintState state;
     public Report report;
 
@@ -40,6 +41,7 @@ public class Sprint {
         this.startTime = startTime;
         this.endTime = endTime;
         this.state = new InitialState(this);
+        this.pipeLineManager = new PipeLineManager();
     }
 
     public SprintType getType() {
@@ -96,12 +98,12 @@ public class Sprint {
 
     public void addPipeline(PipeLine pipeLine) {
         if(this.getType() == SprintType.Release){
-            this.pipeLine = pipeLine;
+            this.pipeLineManager.addNewPipeline(pipeLine);
         }
     }
 
     public PipeLine getPipeline() {
-        return this.pipeLine;
+        return this.pipeLineManager.getPipeline(0);
     }
 
     public void addReport(Report report) {
