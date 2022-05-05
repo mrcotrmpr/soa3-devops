@@ -1,7 +1,7 @@
 package Sprint.States;
 
 import Sprint.*;
-import exceptions.ChangeSprintStateException;
+import Exceptions.ChangeSprintStateException;
 
 public class InitialState implements ISprintState {
 

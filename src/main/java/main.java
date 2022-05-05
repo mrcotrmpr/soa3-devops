@@ -5,11 +5,8 @@ import PipeLine.*;
 import PipeLine.PipeLineManager;
 import Project.Project;
 import Sprint.*;
-import Sprint.States.*;
-import exceptions.ChangeSprintStateException;
+import Exceptions.ChangeSprintStateException;
 
-import java.awt.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 

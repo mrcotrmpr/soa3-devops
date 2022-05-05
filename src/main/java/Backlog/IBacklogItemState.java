@@ -1,6 +1,6 @@
 package Backlog;
 
-import exceptions.ChangeBacklogStateException;
+import Exceptions.ChangeBacklogStateException;
 
 public interface IBacklogItemState {
     void changeToToDoState() throws ChangeBacklogStateException;

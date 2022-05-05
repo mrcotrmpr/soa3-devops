@@ -1,7 +1,7 @@
 package Sprint.States;
 
 import Sprint.Sprint;
-import exceptions.ChangeSprintStateException;
+import Exceptions.ChangeSprintStateException;
 
 public class InProgressState implements ISprintState {
 
