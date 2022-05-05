@@ -3,27 +3,27 @@ package Sprint.States;
 import Sprint.Sprint;
 import exceptions.ChangeSprintStateException;
 
-public class FinishedState implements ISprintState {
+public class ReleaseErrorState implements ISprintState {
 
     private Sprint sprint;
 
-    public FinishedState(Sprint sprint) {
+    public ReleaseErrorState(Sprint sprint) {
         this.sprint = sprint;
     }
 
     @Override
     public void changeToInitialState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to inital!");
+        throw new ChangeSprintStateException("Can't change from release error to inital!");
     }
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to inital!");
+        throw new ChangeSprintStateException("Can't change from release error to in progress!");
     }
 
     @Override
     public void changeToFinishedState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to finished!");
+        throw new ChangeSprintStateException("Can't change from release error to finished!");
     }
 
     @Override
@@ -38,21 +38,16 @@ public class FinishedState implements ISprintState {
 
     @Override
     public void changeToReleaseErrorState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to release error!");
+        throw new ChangeSprintStateException("Can't change from release error to release error!");
     }
 
     @Override
     public void changeToReleaseSuccessState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to release success!");
-
+        throw new ChangeSprintStateException("Can't change from release error to release success!");
     }
 
     @Override
     public void changeToReviewedState() throws ChangeSprintStateException {
-        if (this.sprint.getReport() != null){
-            this.sprint.setState(new ReviewedState(this.sprint));
-        } else {
-            throw new ChangeSprintStateException("Can't change from finished to reviewed without submitting a report!");
-        }
+        throw new ChangeSprintStateException("Can't change from release error to reviewed!");
     }
 }

@@ -3,7 +3,9 @@ package Sprint;
 import Account.Account;
 import Backlog.Backlog;
 import Backlog.BacklogItem;
+import PipeLine.PipeLine;
 import Project.Project;
+import Report.Report;
 import Sprint.States.ISprintState;
 import Sprint.States.InitialState;
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 public class Sprint {
 
+    public SprintType type;
+    public String name;
     public Backlog backlog;
     public Account scrumMaster;
     public Account productOwner;
@@ -20,9 +24,13 @@ public class Sprint {
     public Project project;
     public Date startTime;
     public Date endTime;
+    public PipeLine pipeLine;
     public ISprintState state;
+    public Report report;
 
-    public Sprint(Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime) {
+    public Sprint(SprintType type, String name, Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime) {
+        this.type = type;
+        this.name = name;
         this.backlog = backlog;
         this.scrumMaster = scrumMaster;
         this.productOwner = productOwner;
@@ -32,6 +40,10 @@ public class Sprint {
         this.startTime = startTime;
         this.endTime = endTime;
         this.state = new InitialState(this);
+    }
+
+    public SprintType getType() {
+        return this.type;
     }
 
     public List<BacklogItem> getBacklogItems() {
@@ -80,6 +92,50 @@ public class Sprint {
 
     public Class<? extends ISprintState> getState(){
         return this.state.getClass();
+    }
+
+    public void addPipeline(PipeLine pipeLine) {
+        if(this.getType() == SprintType.Release){
+            this.pipeLine = pipeLine;
+        }
+    }
+
+    public PipeLine getPipeline() {
+        return this.pipeLine;
+    }
+
+    public void addReport(Report report) {
+        this.report = report;
+    }
+
+    public Report getReport() {
+        return this.report;
+    }
+
+    public void setName(String name) {
+        if(checkInitialState()){
+            this.name = name;
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setStartTime(Date startTime) {
+        if(checkInitialState()){
+            this.startTime = startTime;
+        }
+    }
+
+    public void setEndTime(Date endTime) {
+        if(checkInitialState()){
+            this.endTime = endTime;
+        }
+    }
+
+    private boolean checkInitialState(){
+        return this.getState() == InitialState.class;
     }
 
 }
