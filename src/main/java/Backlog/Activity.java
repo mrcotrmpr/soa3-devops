@@ -7,10 +7,16 @@ public class Activity {
 
     public Activity(String description) {
         this.description = description;
+        this.done = false;
     }
-    public void setDone(Boolean done) {
-        this.done = done;
+    public void completeActivity(){
+        this.done = true;
     }
+    public void unCompleteActivity(){
+        this.done = false;
+    }
+
+
     public Boolean getDone() {
         return done;
     }

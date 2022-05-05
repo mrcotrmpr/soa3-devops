@@ -51,6 +51,7 @@ public class BacklogItem {
     public Activity getActivity(int index) {
         return activities.get(index);
     }
+
     public boolean activitiesDone() {
         for (Activity activity : activities) {
             if (!activity.getDone()) {
