@@ -1,6 +1,6 @@
 package Sprint.States;
 
-import Exceptions.ChangeSprintStateException;
+import exceptions.ChangeSprintStateException;
 
 public interface ISprintState {
     void changeToInitialState() throws ChangeSprintStateException;
