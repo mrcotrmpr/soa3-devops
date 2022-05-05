@@ -1,5 +1,5 @@
 import Account.*;
-import Backlog.Backlog;
+import Backlog.*;
 import Notification.*;
 import PipeLine.*;
 import PipeLine.PipeLineManager;
@@ -16,7 +16,8 @@ class main {
     public static void main(String[] args) throws ChangeSprintStateException, InterruptedException {
 
         // Backlog
-        Backlog backlog = new Backlog();
+        BacklogFactory factory = new BacklogFactory();
+        Backlog backlog = factory.getBacklog("BACKLOG");
 
         // Account(s)
         Account scrumMaster = new ScrumMaster("scrumMaster", 1, "email@email.com", "0612345678", "slackUser");

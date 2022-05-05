@@ -35,8 +35,6 @@ public class BacklogItem {
         return description;
     }
 
-
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -60,7 +58,6 @@ public class BacklogItem {
         }
         return true;
     }
-
 
     public void setValue(int value) {
         this.value = value;
