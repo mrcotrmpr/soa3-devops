@@ -39,6 +39,8 @@ public class FinishedState implements ISprintState {
     public void changeToReleaseCancelledState() throws ChangeSprintStateException {
         if(this.sprint.getType() == SprintType.Release) {
             this.sprint.setState(new ReleaseCancelledState(this.sprint));
+            this.sprint.notifySpecificSubscribers("ProductOwner", "The sprint release has been cancelled");
+            this.sprint.notifySpecificSubscribers("ScrumMaster", "The sprint release has been cancelled");
         } else {
             throw new ChangeSprintStateException("Can't cancel a review sprint");
         }

@@ -39,11 +39,9 @@ public class TestedState implements IBacklogItemState {
     public void changeToDoneState() throws ChangeBacklogStateException {
         if (this._backlogItem.activitiesDone()){
             this._backlogItem.setState(new DoneState(this._backlogItem));
-        }else
+        } else
         {
-            throw new ChangeBacklogStateException("Can't change from Tested to Done bewcause activities are not done!");
+            throw new ChangeBacklogStateException("Can't change from Tested to Done because activities are not done!");
         }
-        //TODO: F9 Als gebruiker wil ik een backlog item pas de status 'Done' kunnen geven als alle taken zijn afgerond zodat deze taken niet over het hoofd worden gezien
-
     }
 }

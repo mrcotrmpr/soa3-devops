@@ -24,7 +24,7 @@ public class DoingState implements IBacklogItemState {
     public void changeToReadyForTestingState() {
         this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
 
-        this._backlogItem.notifySpecificSubscribers("Tester");
+        this._backlogItem.notifySpecificSubscribers("Tester", "Backlog item changed from doing to ready for testing");
 
     }
 

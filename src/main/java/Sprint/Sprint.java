@@ -3,6 +3,7 @@ package Sprint;
 import Account.Account;
 import Backlog.Backlog;
 import Backlog.BacklogItem;
+import Notification.Subscriber;
 import PipeLine.PipeLine;
 import PipeLine.PipeLineManager;
 import Project.Project;
@@ -11,7 +12,9 @@ import Sprint.States.ISprintState;
 import Sprint.States.InitialState;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Sprint {
 
@@ -28,6 +31,8 @@ public class Sprint {
     public PipeLineManager pipeLineManager;
     public ISprintState state;
     public Report report;
+
+    public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
     public Sprint(SprintType type, String name, Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime) {
         this.type = type;
@@ -138,6 +143,23 @@ public class Sprint {
 
     private boolean checkInitialState(){
         return this.getState() == InitialState.class;
+    }
+
+    public void subscribe(Account account, Subscriber s) {
+        this.subscribers.put(account, s);
+    }
+
+    public void unsubscribe(Account account) {
+        this.subscribers.remove(account);
+    }
+
+    public void notifySpecificSubscribers(String accountTypes, String message) {
+
+        for (Map.Entry<Account, Subscriber> entry : subscribers.entrySet()) {
+            if(entry.getKey().getClass().getSimpleName().equals(accountTypes)){
+                entry.getValue().update(message);
+            }
+        }
     }
 
 }
