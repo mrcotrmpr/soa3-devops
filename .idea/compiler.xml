@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="testmaven" />
+        <module name="SOA3-DevOps" />
       </profile>
     </annotationProcessing>
   </component>
