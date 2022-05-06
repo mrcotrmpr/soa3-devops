@@ -3,6 +3,7 @@ package Backlog;
 import Account.Account;
 import Account.Developer;
 import Notification.Subscriber;
+import Forum.DiscussionThread;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class BacklogItem {
     public int priority;
     public List<Activity> activities;
     public Developer assignedTo;
+    private final DiscussionThread thread;
 
     public IBacklogItemState state;
 
@@ -29,6 +31,7 @@ public class BacklogItem {
         this.priority = priority;
         this.state = new ToDoState(this);
         this.activities = new ArrayList<Activity>();
+        this.thread = new DiscussionThread(this.description);
     }
 
     public String getDescription() {
@@ -114,4 +117,13 @@ public class BacklogItem {
             }
         }
     }
+
+    public void addCommentToThread(String comment){
+        this.thread.addComment(comment);
+    }
+
+    public DiscussionThread getThread(){
+        return this.thread;
+    }
+
 }

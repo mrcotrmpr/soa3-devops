@@ -38,6 +38,7 @@ public class TestedState implements IBacklogItemState {
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
         if (this._backlogItem.activitiesDone()){
+            this._backlogItem.getThread().setActive(false);
             this._backlogItem.setState(new DoneState(this._backlogItem));
         } else
         {

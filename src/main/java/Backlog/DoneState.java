@@ -12,6 +12,7 @@ public class DoneState implements IBacklogItemState {
 
     @Override
     public void changeToToDoState() {
+        this._backlogItem.getThread().setActive(true);
         this._backlogItem.setState(new ToDoState(this._backlogItem));
     }
 

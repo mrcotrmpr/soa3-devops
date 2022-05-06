@@ -9,7 +9,7 @@ public class TreeNode {
     private List children = null;
     private Comment comment;
 
-    public TreeNode( Comment comment) {
+    public TreeNode(Comment comment) {
         this.parent = null;
         this.children = new ArrayList<TreeNode>();
         this.comment = comment;
