@@ -35,13 +35,19 @@ class main {
         DiscussionThread t = backlogItem.getThread();
         System.out.println(t.getThread());
 
+        INotifier notifier = new SlackNotify();
+        Subscriber sub = new NotificationService(notifier);
+        t.subscribe(sub);
+
         backlogItem.addCommentToThread("Hello this is a comment");
-        backlogItem.addCommentToThread("Hello this is also a comment");
-        backlogItem.addCommentToThread("Hello this is a new comment");
-        backlogItem.addCommentToThread("Hello this is a newer comment");
 
         DiscussionThread t2 = backlogItem.getThread();
         System.out.println(t2.getThread());
+
+        backlogItem.addCommentToThread("Hello this is also a comment");
+
+        DiscussionThread t3 = backlogItem.getThread();
+        System.out.println(t3.getThread());
 
         System.out.println(backlogItem.getThread().isActive());
 
@@ -96,8 +102,8 @@ class main {
 
         Sprint testSprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
 
-        INotifier notifier = new SlackNotify();
-        Subscriber s = new NotificationService(notifier);
+        INotifier notifier2 = new SlackNotify();
+        Subscriber s = new NotificationService(notifier2);
         testSprint.subscribe(productOwner, s);
 
         // States
