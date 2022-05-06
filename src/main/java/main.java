@@ -1,23 +1,61 @@
 import Account.*;
 import Backlog.*;
+import Forum.DiscussionThread;
 import Notification.*;
 import PipeLine.*;
 import PipeLine.PipeLineManager;
 import Project.Project;
 import Sprint.*;
+import exceptions.ChangeBacklogStateException;
 import exceptions.ChangeSprintStateException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 class main {
 
-    public static void main(String[] args) throws ChangeSprintStateException, InterruptedException {
+    public static void main(String[] args) throws ChangeSprintStateException, InterruptedException, ChangeBacklogStateException {
+
+        System.out.println("// Backlog\n");
 
         // Backlog
         BacklogFactory factory = new BacklogFactory();
         Backlog backlog = factory.getBacklog("BACKLOG");
+
+        BacklogItem backlogItem = new BacklogItem("Description", 1,1,1);
+        backlog.addBacklogItem(backlogItem);
+        List<BacklogItem> items = backlog.getBacklogItems();
+
+        for (BacklogItem item: items) {
+            System.out.println(item.description);
+        }
+
+        DiscussionThread t = backlogItem.getThread();
+        System.out.println(t.getThread());
+
+        backlogItem.addCommentToThread("Hello this is a comment");
+        backlogItem.addCommentToThread("Hello this is also a comment");
+        backlogItem.addCommentToThread("Hello this is a new comment");
+        backlogItem.addCommentToThread("Hello this is a newer comment");
+
+        DiscussionThread t2 = backlogItem.getThread();
+        System.out.println(t2.getThread());
+
+        System.out.println(backlogItem.getThread().isActive());
+
+        System.out.println(backlogItem.getState());
+        backlogItem.getState().changeToDoingState();
+        backlogItem.getState().changeToReadyForTestingState();
+        backlogItem.getState().changeToTestingState();
+        backlogItem.getState().changeToTestedState();
+        backlogItem.getState().changeToDoneState();
+
+        System.out.println(backlogItem.getThread().isActive());
+
+        backlogItem.getState().changeToToDoState();
+        System.out.println(backlogItem.getThread().isActive());
 
         // Account(s)
         Account scrumMaster = new ScrumMaster("scrumMaster", 1, "email@email.com", "0612345678", "slackUser");
@@ -63,6 +101,8 @@ class main {
         testSprint.subscribe(productOwner, s);
 
         // States
+
+        System.out.println("\n// States\n");
 
         System.out.println(testSprint.getState());
 
