@@ -1,13 +1,10 @@
 package Forum;
 
-import Account.Account;
 import Notification.Publisher;
 import Notification.Subscriber;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DiscussionThread implements Publisher {
 

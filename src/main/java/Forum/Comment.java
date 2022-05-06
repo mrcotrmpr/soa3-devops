@@ -1,8 +1,5 @@
 package Forum;
 
-import Account.Account;
-
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Comment {
