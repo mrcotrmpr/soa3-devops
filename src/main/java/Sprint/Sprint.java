@@ -34,7 +34,7 @@ public class Sprint {
 
     public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
-    public Sprint(SprintType type, String name, Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime) {
+    public Sprint(SprintType type, String name, Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, Project project, Date startTime, Date endTime){
         this.type = type;
         this.name = name;
         this.backlog = backlog;
@@ -97,8 +97,8 @@ public class Sprint {
         this.state = state;
     }
 
-    public Class<? extends ISprintState> getState(){
-        return this.state.getClass();
+    public ISprintState getState() {
+        return state;
     }
 
     public void addPipeline(PipeLine pipeLine) {
@@ -142,7 +142,7 @@ public class Sprint {
     }
 
     private boolean checkInitialState(){
-        return this.getState() == InitialState.class;
+        return this.getState().getClass() == InitialState.class;
     }
 
     public void subscribe(Account account, Subscriber s) {
