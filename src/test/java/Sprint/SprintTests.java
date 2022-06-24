@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 public class SprintTests {
 
@@ -27,16 +28,27 @@ public class SprintTests {
     Date date = new Date();
 
     @Test
-    public void testSprintStateStartsAtInitial(){
+    public void T14_1_sprint_can_be_created_with_review_type(){
         // Arrange
-        Sprint testSprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+        Sprint reviewSprint = new Sprint(review,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
 
         // Act
-        Class<? extends ISprintState> state = testSprint.getState();
+        Class<? extends ISprintState> state = reviewSprint.getState();
 
         // Assert
         assertEquals(state, InitialState.class);
+    }
 
+    @Test
+    public void T14_2_sprint_can_be_created_with_release_type(){
+        // Arrange
+        Sprint reviewSprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+
+        // Act
+        Class<? extends ISprintState> state = reviewSprint.getState();
+
+        // Assert
+        assertEquals(state, InitialState.class);
     }
 
 }
