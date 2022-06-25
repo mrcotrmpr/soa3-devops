@@ -112,6 +112,10 @@ public class Sprint {
     }
 
     public void addReport(Report report) {
+        if(checkInitialState()){
+            System.out.println("Cannot add a report in this stage!");
+            return;
+        }
         this.report = report;
     }
 
