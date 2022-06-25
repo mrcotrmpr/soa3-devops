@@ -1,23 +1,29 @@
 package Notification;
 
-import nl.altindag.console.ConsoleCaptor;
 import org.testng.annotations.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class NotificationTests {
-
-    ConsoleCaptor consoleCaptor = new ConsoleCaptor();
 
     @Test
     public void T44_1_send_notification_via_slack() {
         // Arrange
         INotifier notifier = new SlackNotify();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         // Act
         notifier.sendNotification("This is a slack message");
 
         // Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("Sent Slack message: This is a slack message");
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("Sent Slack message: This is a slack message"));
+
     }
 
     @Test
@@ -25,12 +31,15 @@ public class NotificationTests {
         // Arrange
         INotifier notifier = new MailNotify();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         // Act
         notifier.sendNotification("This is a mail");
 
         // Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("Sending mail: This is a mail");
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("Sending mail: This is a mail"));
     }
 
 }

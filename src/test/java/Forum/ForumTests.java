@@ -5,15 +5,15 @@ import Notification.INotifier;
 import Notification.MailNotify;
 import Notification.NotificationService;
 import Notification.Subscriber;
-import exceptions.ChangeBacklogStateException;
-import nl.altindag.console.ConsoleCaptor;
 import org.testng.annotations.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import static org.testng.AssertJUnit.*;
 
 public class ForumTests {
-
-    ConsoleCaptor consoleCaptor = new ConsoleCaptor();
 
     @Test
     public void T34_1_backlog_item_is_created_with_empty_thread() throws Exception {
@@ -93,12 +93,16 @@ public class ForumTests {
         Subscriber sub = new NotificationService(notifier);
         thread.subscribe(sub);
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         // Act
         thread.addComment("new comment");
 
         // Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("Sending mail: Received a new comment; new comment");
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("Sending mail: Received a new comment; new comment"));
+
     }
 
     @Test

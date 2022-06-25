@@ -2,8 +2,14 @@ package Report;
 
 import nl.altindag.console.ConsoleCaptor;
 import org.testng.annotations.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class ReportTests {
 
@@ -18,6 +24,10 @@ public class ReportTests {
 
         Date date = new Date();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         //Act
         reportBuilder.addHeader("Company name", "Sprint name", 1, date);
         reportBuilder.addContent(contents);
@@ -26,13 +36,13 @@ public class ReportTests {
         reportBuilder.getReport();
 
         //Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("PDF");
-//        assert(consoleCaptor.getStandardOutput()).contains("-----------------------------");
-//        assert(consoleCaptor.getStandardOutput()).contains("companyName='Company name', sprintName='Sprint name', version=1, date=" + date);
-//        assert(consoleCaptor.getStandardOutput()).contains("[This is a report!]");
-//        assert(consoleCaptor.getStandardOutput()).contains("address='Address', companyName='Company name', phoneNumber='06'");
-//        assert(consoleCaptor.getStandardOutput()).contains("-----------------------------");
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("PDF"));
+        assertTrue(os.toString().contains("-----------------------------"));
+        assertTrue(os.toString().contains("companyName='Company name', sprintName='Sprint name', version=1, date=" + date));
+        assertTrue(os.toString().contains("[This is a report!]"));
+        assertTrue(os.toString().contains("address='Address', companyName='Company name', phoneNumber='06'"));
+        assertTrue(os.toString().contains("-----------------------------"));
+
     }
 
     @Test
@@ -44,6 +54,10 @@ public class ReportTests {
 
         Date date = new Date();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         //Act
         reportBuilder.addHeader("Company name", "Sprint name", 1, date);
         reportBuilder.addContent(contents);
@@ -52,8 +66,8 @@ public class ReportTests {
         reportBuilder.getReport();
 
         //Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("companyName='Company name', sprintName='Sprint name', version=1, date=" + date);
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("companyName='Company name', sprintName='Sprint name', version=1, date=" + date));
+
     }
 
     @Test
@@ -65,6 +79,10 @@ public class ReportTests {
 
         Date date = new Date();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         //Act
         reportBuilder.addHeader("", "", 0, date);
         reportBuilder.addContent(contents);
@@ -73,8 +91,8 @@ public class ReportTests {
         reportBuilder.getReport();
 
         //Assert
-//        assert(consoleCaptor.getStandardOutput()).contains("address='Address', companyName='Company name', phoneNumber='06'");
-        consoleCaptor.clearOutput();
+        assertTrue(os.toString().contains("address='Address', companyName='Company name', phoneNumber='06'"));
+
     }
 
     @Test(expectedExceptions = NullPointerException.class)
