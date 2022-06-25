@@ -24,7 +24,16 @@ public class BacklogItem {
 
     public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
-    public BacklogItem(String description, int value, int estimate, int priority) {
+    public BacklogItem(String description, int value, int estimate, int priority) throws Exception {
+        if(value<= 0){
+            throw new IllegalArgumentException ("Value cant be null or negative");
+        }
+        if(estimate <=0){
+            throw new IllegalArgumentException ("Estimate cant be null or negative");
+        }
+        if(priority <= 0){
+            throw new IllegalArgumentException ("Estimate cant be null or negative");
+        }
         this.description = description;
         this.value = value;
         this.estimate = estimate;
@@ -79,6 +88,7 @@ public class BacklogItem {
     }
 
     public void setPriority(int priority) {
+
         this.priority = priority;
     }
 
