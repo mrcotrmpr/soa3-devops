@@ -1,5 +1,7 @@
 package Backlog;
 
+import Account.Account;
+import Account.LeadDeveloper;
 import exceptions.ChangeBacklogStateException;
 
 public class TestedState implements IBacklogItemState {
@@ -21,8 +23,13 @@ public class TestedState implements IBacklogItemState {
     }
 
     @Override
-    public void changeToReadyForTestingState() {
-        this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
+    public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
+        if(PriviligeCheck.CheckPrivilage(account, LeadDeveloper.class)){
+            this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
+        }else{
+            throw new ChangeBacklogStateException(account.getClass().toString()+" does not have permission to change back to ready for testing");
+        }
+
     }
 
     @Override
