@@ -6,29 +6,33 @@ import Sprint.Sprint;
 
 import java.util.ArrayList;
 
-public class Project {
+public class ScrumProject implements IProject {
+
     public Backlog projectBacklog;
     public Account productOwner;
     public ArrayList<Sprint> sprints;
     public String name;
 
-    public Project(Backlog projectBacklog, Account productOwner, String name) {
-        this.projectBacklog = projectBacklog;
+    public void setProductOwner(Account productOwner) {
         this.productOwner = productOwner;
-        this.sprints = new ArrayList<Sprint>();
+    }
+
+    public ScrumProject(String name) {
         this.name = name;
+        this.sprints = new ArrayList<>();
+        this.projectBacklog = new Backlog();
     }
 
     public Account getProductOwner() {
         return productOwner;
     }
 
-    public ArrayList<Sprint> getSprints() {
-        return sprints;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Sprint> getSprints() {
+        return sprints;
     }
 
     public void addSprint(Sprint sprint){

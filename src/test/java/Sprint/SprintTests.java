@@ -4,7 +4,7 @@ import Account.*;
 import Backlog.Backlog;
 import Notification.*;
 import PipeLine.PipeLine;
-import Project.Project;
+import Project.ScrumProject;
 import Report.Report;
 import Sprint.States.*;
 import exceptions.ChangeSprintStateException;
@@ -25,7 +25,7 @@ public class SprintTests {
     Account productOwner = new ProductOwner("testProductOwner", 2, "test@email.com", "0612345678", "testUser");
     ArrayList<Account> devs = new ArrayList<Account>();
     ArrayList<Account> testers = new ArrayList<Account>();
-    Project project = new Project(backlog, productOwner, "Project 1");
+    ScrumProject project = new ScrumProject("Project 1");
     Date date = new Date();
     ConsoleCaptor consoleCaptor = new ConsoleCaptor();
 
