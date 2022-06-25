@@ -1,5 +1,6 @@
 package Forum;
 
+import Account.Developer;
 import Backlog.*;
 import Notification.INotifier;
 import Notification.MailNotify;
@@ -141,11 +142,12 @@ public class ForumTests {
     @Test
     public void T37_38_2_thread_status_should_be_false_when_status_done() throws Exception {
         // Arrange
+        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
         BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         backlogItem.getState().changeToDoingState();
-        backlogItem.getState().changeToReadyForTestingState();
+        backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();

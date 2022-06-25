@@ -1,5 +1,6 @@
 package Backlog;
 
+import Account.Account;
 import exceptions.ChangeBacklogStateException;
 
 public class DoingState implements IBacklogItemState {
@@ -21,7 +22,7 @@ public class DoingState implements IBacklogItemState {
     }
 
     @Override
-    public void changeToReadyForTestingState() {
+    public void changeToReadyForTestingState(Account account) {
         this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
 
         this._backlogItem.notifySpecificSubscribers("Tester", "Backlog item changed from doing to ready for testing");
