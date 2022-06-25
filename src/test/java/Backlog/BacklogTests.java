@@ -14,11 +14,15 @@ import exceptions.ChangeBacklogStateException;
 import nl.altindag.console.ConsoleCaptor;
 import org.testng.annotations.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class BacklogTests {
 
@@ -380,13 +384,15 @@ public class BacklogTests {
         backlogItem.subscribe(tester,notificationService);
         backlogItem.state.changeToDoingState();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+
         //Act
         backlogItem.state.changeToReadyForTestingState();
+
         //Assert
-
-//        assert(consoleCaptor.getStandardOutput()).contains("Sent Slack message: Backlog item changed from doing to ready for testing");
-        consoleCaptor.clearOutput();
-
+        assertTrue(os.toString().contains("Sent Slack message: Backlog item changed from doing to ready for testing"));
 
     }
     @Test
@@ -399,15 +405,15 @@ public class BacklogTests {
         backlogItem.state.changeToDoingState();
         backlogItem.state.changeToReadyForTestingState();
 
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
 
         //Act
         backlogItem.state.changeToToDoState();
         //Assert
 
-//        assert(consoleCaptor.getStandardOutput()).contains("Sent Slack message: Change from ready to testing to doing");
-        consoleCaptor.clearOutput();
-
-
+        assertTrue(os.toString().contains("Sent Slack message: Change from ready to testing to doing"));
     }
 
 }
