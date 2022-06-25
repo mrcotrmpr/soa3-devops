@@ -16,9 +16,9 @@ public class ForumTests {
     ConsoleCaptor consoleCaptor = new ConsoleCaptor();
 
     @Test
-    public void T34_1_backlog_item_is_created_with_empty_thread(){
+    public void T34_1_backlog_item_is_created_with_empty_thread() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         DiscussionThread thread = backlogItem.getThread();
@@ -29,9 +29,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T35_1_can_respond_to_discussion_thread(){
+    public void T35_1_can_respond_to_discussion_thread() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         DiscussionThread thread = backlogItem.getThread();
@@ -45,9 +45,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T35_2_can_respond_to_discussion_thread_when_active(){
+    public void T35_2_can_respond_to_discussion_thread_when_active() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         DiscussionThread thread = backlogItem.getThread();
@@ -63,9 +63,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T35_3_can_not_respond_to_discussion_thread_when_inactive(){
+    public void T35_3_can_not_respond_to_discussion_thread_when_inactive() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         DiscussionThread thread = backlogItem.getThread();
@@ -84,9 +84,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T36_1_subscribers_of_discussion_thread_receive_notification(){
+    public void T36_1_subscribers_of_discussion_thread_receive_notification() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
         DiscussionThread thread = backlogItem.getThread();
 
         INotifier notifier = new MailNotify();
@@ -102,9 +102,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T37_38_1_thread_status_should_be_true_when_status_todo(){
+    public void T37_38_1_thread_status_should_be_true_when_status_todo() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         IBacklogItemState state = backlogItem.getState();
@@ -118,9 +118,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T37_38_2_thread_status_should_be_true_when_status_in_progress() throws ChangeBacklogStateException {
+    public void T37_38_2_thread_status_should_be_true_when_status_in_progress() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         backlogItem.getState().changeToDoingState();
@@ -135,9 +135,9 @@ public class ForumTests {
     }
 
     @Test
-    public void T37_38_2_thread_status_should_be_false_when_status_done() throws ChangeBacklogStateException {
+    public void T37_38_2_thread_status_should_be_false_when_status_done() throws Exception {
         // Arrange
-        BacklogItem backlogItem = new BacklogItem("BacklogItem", 0, 1, 2);
+        BacklogItem backlogItem = new BacklogItem("BacklogItem", 1, 1, 2);
 
         // Act
         backlogItem.getState().changeToDoingState();
