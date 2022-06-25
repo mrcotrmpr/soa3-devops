@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Project {
     public Backlog projectBacklog;
-    //    public Forum forum
     public Account productOwner;
     public ArrayList<Sprint> sprints;
     public String name;
@@ -31,7 +30,8 @@ public class Project {
     public String getName() {
         return name;
     }
-    public void addSprints(Sprint sprint){
+
+    public void addSprint(Sprint sprint){
         this.sprints.add(sprint);
     }
 }
