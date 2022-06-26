@@ -6,7 +6,6 @@ import account.ProductOwner;
 import account.Tester;
 import account.Developer;
 import account.LeadDeveloper;
-import backlog.exceptions.ExceptionCreator;
 import notification.NotificationService;
 import notification.SlackNotify;
 import exceptions.ChangeBacklogStateException;
@@ -899,14 +898,19 @@ public class BacklogTests {
     }
 
     @Test(expectedExceptions = ChangeBacklogStateException.class)
-    public void test_exception_creator() throws ChangeBacklogStateException {
+    public void test_test() throws ChangeBacklogStateException {
         // Arrange
-        ExceptionCreator exceptionCreator = new ExceptionCreator();
+        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
         // Act
-        exceptionCreator.throwException("New exception");
+        backlogItem.getState().changeToDoingState();
+        backlogItem.getState().changeToReadyForTestingState(developer);
+        backlogItem.getState().changeToTestingState();
+        backlogItem.getState().changeToTestedState();
+        backlogItem.getState().changeToDoneState();
+        backlogItem.getState().changeToDoingState();
 
         // Assert
-
     }
 }
