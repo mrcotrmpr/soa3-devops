@@ -118,7 +118,7 @@ public class Sprint {
 
     public void addReport(Report report) {
         if(checkInitialState()){
-            System.out.println("Cannot add a report in this stage!");
+            System.out.println("Cannot add a report in this stage!");// NOSONAR
             return;
         }
         this.report = report;

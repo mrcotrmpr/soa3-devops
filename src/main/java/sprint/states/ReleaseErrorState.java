@@ -29,7 +29,7 @@ public class ReleaseErrorState implements ISprintState {
 
     @Override
     public void changeToReleasingState() {
-        System.out.println("Re releasing pipeline..");
+        System.out.println("Re releasing pipeline..");// NOSONAR
         this.sprint.setState(new ReleasingState(this.sprint));
     }
 
@@ -37,7 +37,7 @@ public class ReleaseErrorState implements ISprintState {
     public void changeToReleaseCancelledState(){
         this.sprint.notifySpecificSubscribers("ScrumMaster", releaseCancelled);
         this.sprint.notifySpecificSubscribers("ProductOwner", releaseCancelled);
-        System.out.println(releaseCancelled);
+        System.out.println(releaseCancelled);// NOSONAR
         this.sprint.setState(new ReleaseCancelledState(this.sprint));
     }
 
