@@ -12,6 +12,10 @@ public class ReleaseErrorState implements ISprintState {
         this.sprint = sprint;
     }
 
+    private void throwSprintException(String msg) throws ChangeSprintStateException {
+        throw new ChangeSprintStateException(msg);
+    }
+
     @Override
     public void changeToInitialState() throws ChangeSprintStateException {
         throw new ChangeSprintStateException("Can't change from release error to inital!");
@@ -19,7 +23,7 @@ public class ReleaseErrorState implements ISprintState {
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from release error to in progress!");
+        throwSprintException("Can't change from release error to in progress!");
     }
 
     @Override

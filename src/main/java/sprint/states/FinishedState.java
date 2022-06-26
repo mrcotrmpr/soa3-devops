@@ -11,6 +11,10 @@ public class FinishedState implements ISprintState {
         this.sprint = sprint;
     }
 
+    private void throwSprintException(String msg) throws ChangeSprintStateException {
+        throw new ChangeSprintStateException(msg);
+    }
+
     @Override
     public void changeToInitialState() throws ChangeSprintStateException {
         throw new ChangeSprintStateException("Can't change from finished to inital!");
@@ -18,7 +22,7 @@ public class FinishedState implements ISprintState {
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from finished to inital!");
+        throwSprintException("Can't change from finished to inital!");
     }
 
     @Override
