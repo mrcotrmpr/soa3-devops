@@ -1,19 +1,17 @@
 package SCM;
 
-import java.util.ArrayList;
-
 public class PullRequest {
 
     private final int id;
+    private final int branchId;
     private final String title;
     private final String description;
-    private ArrayList<Commit> commitList;
 
-    public PullRequest(int id, String title, String description, ArrayList<Commit> commitList) {
+    public PullRequest(int id, int branchId, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.commitList = commitList;
+        this.branchId = branchId;
     }
 
     public int getId() {
@@ -28,11 +26,7 @@ public class PullRequest {
         return description;
     }
 
-    public ArrayList<Commit> getCommitList() {
-        return commitList;
-    }
-
-    public void setCommitList(ArrayList<Commit> commitList) {
-        this.commitList = commitList;
+    public int getBranchId() {
+        return branchId;
     }
 }

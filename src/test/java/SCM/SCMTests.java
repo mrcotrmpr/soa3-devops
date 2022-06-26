@@ -43,19 +43,19 @@ public class SCMTests {
     @Test
     public void T42_3_PR_is_created(){
         // Arrange
-        PullRequest pullRequest = new PullRequest(1, "PR1", "Initial PR", new ArrayList<Commit>());
+        PullRequest pullRequest = new PullRequest(1, 2, "PR1", "Initial PR");
 
         // Act
         int id = pullRequest.getId();
+        int branchId = pullRequest.getBranchId();
         String title = pullRequest.getTitle();
         String description = pullRequest.getDescription();
-        ArrayList<Commit> commits = pullRequest.getCommitList();
 
         // Assert
         assertEquals(id, 1);
+        assertEquals(branchId, 2);
         assertEquals(title, "PR1");
         assertEquals(description, "Initial PR");
-        assertEquals(commits.size(), 0);
     }
 
     @Test
@@ -70,24 +70,6 @@ public class SCMTests {
         // Assert
         assertEquals(branch.getCommits().size(), 1);
         assertEquals(branch.getCommitAtIndex(0), commit);
-    }
-
-    @Test
-    public void T42_5_PR_is_made_with_list_of_commits(){
-        // Arrange
-        PullRequest pullRequest = new PullRequest(1, "PR1", "Initial PR", new ArrayList<Commit>());
-        Commit commit1 = new Commit(1, "Initial commit", new ArrayList<>());
-        Commit commit2 = new Commit(2, "Second commit", new ArrayList<>());
-
-        // Act
-        ArrayList<Commit> commits = new ArrayList<>();
-        commits.add(commit1);
-        commits.add(commit2);
-
-        pullRequest.setCommitList(commits);
-
-        // Assert
-        assertEquals(pullRequest.getCommitList().size(), 2);
     }
 
 }
