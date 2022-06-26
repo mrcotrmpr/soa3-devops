@@ -37,7 +37,7 @@ public class Sprint {
     private ISprintState state;
     private Report report;
 
-    public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
+    private final Map<Account, Subscriber> subscribers = new HashMap<>();
 
     public Sprint(SprintType type, String name, Backlog backlog, Account scrumMaster, Account productOwner, List<Account> developers, List<Account> testers, IProject project, Date startTime, Date endTime){
         this.type = type;
