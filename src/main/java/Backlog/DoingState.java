@@ -13,12 +13,13 @@ public class DoingState implements IBacklogItemState {
 
     @Override
     public void changeToToDoState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Doing to ToDo!");
+        ErrorHandler.throwChangeStateError("Can't change from Doing to ToDo!");
+
     }
 
     @Override
     public void changeToDoingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Doing to Doing!");
+        ErrorHandler.throwChangeStateError("Can't change from Doing to Doing!");
     }
 
     @Override
@@ -31,17 +32,16 @@ public class DoingState implements IBacklogItemState {
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form Doing to Testing!");
+        ErrorHandler.throwChangeStateError("Can't change form Doing to Testing!");
     }
 
     @Override
     public void changeToTestedState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form Doing to Tested!");
-
+        ErrorHandler.throwChangeStateError("Can't change form Doing to Tested!");
     }
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change form Doing to Done!");
+        ErrorHandler.throwChangeStateError("Can't change form Doing to Done!");
     }
 }
