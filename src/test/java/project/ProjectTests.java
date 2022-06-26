@@ -29,7 +29,7 @@ public class ProjectTests {
 
         //Assert
         assertEquals(name, "FirstProject");
-        assertEquals(productOwner.name, "Name");
+        assertEquals(productOwner.getName(), "Name");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ProjectTests {
 
         //Assert
         assertEquals(name, "KanbanProject");
-        assertEquals(productOwner.name, "Name");
+        assertEquals(productOwner.getName(), "Name");
     }
 
     @Test
