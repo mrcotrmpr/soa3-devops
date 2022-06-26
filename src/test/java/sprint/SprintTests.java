@@ -701,7 +701,7 @@ public class SprintTests {
         sprint.getState().changeToReleaseCancelledState();
 
         // Assert
-        assertTrue(os.toString().contains("Sent Slack message: Sprint release has been cancelled"));
+        assertTrue(os.toString().contains("Sent Slack message: Sprint release has failed"));
 
         consoleCaptor.clearOutput();
     }
@@ -922,7 +922,7 @@ public class SprintTests {
         sprint.getState().changeToReleaseCancelledState();
 
         // Assert
-        assert(consoleCaptor.getStandardOutput()).contains("Sprint release has been cancelled");
+        assert(consoleCaptor.getStandardOutput()).contains("Sprint release has failed");
         consoleCaptor.clearOutput();
     }
 
