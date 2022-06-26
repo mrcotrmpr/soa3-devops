@@ -1,7 +1,6 @@
 package sprint;
 
 import account.Account;
-import account.Developer;
 import backlog.Backlog;
 import backlog.BacklogItem;
 import notification.Subscriber;
