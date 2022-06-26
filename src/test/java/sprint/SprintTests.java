@@ -1,7 +1,6 @@
 package sprint;
 
 import account.*;
-import backlog.Backlog;
 import notification.*;
 import pipeline.PipeLine;
 import project.ScrumProject;
@@ -13,7 +12,6 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Date;
 
 import nl.altindag.console.ConsoleCaptor;
