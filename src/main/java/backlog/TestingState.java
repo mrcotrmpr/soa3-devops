@@ -11,10 +11,6 @@ public class TestingState implements IBacklogItemState {
         this.backlogItem = context;
     }
 
-    private void throwException(String msg) throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException(msg);
-    }
-
     @Override
     public void changeToToDoState() {
         this.backlogItem.setState(new ToDoState(this.backlogItem));
@@ -22,17 +18,17 @@ public class TestingState implements IBacklogItemState {
 
     @Override
     public void changeToDoingState() throws ChangeBacklogStateException {
-        throwException("Can't change from Testing to Doing!");
+        throw new ChangeBacklogStateException("Can't change from Testing to Doing!");
     }
 
     @Override
     public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
-        throwException("Can't change from Testing to ReadyForTesting!");
+        throw new ChangeBacklogStateException("Can't change from Testing to ReadyForTesting!");
     }
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
-        throwException("Can't change from Testing to Testing");
+        throw new ChangeBacklogStateException("Can't change from Testing to Testing");
     }
 
     @Override
@@ -42,6 +38,6 @@ public class TestingState implements IBacklogItemState {
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throwException("Can't change from Testing to Done!");
+        throw new ChangeBacklogStateException("Can't change from Testing to Done!");
     }
 }
