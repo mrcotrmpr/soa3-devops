@@ -6,6 +6,7 @@ import account.ProductOwner;
 import account.Tester;
 import account.Developer;
 import account.LeadDeveloper;
+import backlog.exceptions.ExceptionCreator;
 import notification.NotificationService;
 import notification.SlackNotify;
 import exceptions.ChangeBacklogStateException;
@@ -895,6 +896,17 @@ public class BacklogTests {
         // Assert
         assertTrue(resTrue);
         assertFalse(resFalse);
+    }
+
+    @Test(expectedExceptions = ChangeBacklogStateException.class)
+    public void test_exception_creator() throws ChangeBacklogStateException {
+        // Arrange
+        ExceptionCreator exceptionCreator = new ExceptionCreator();
+
+        // Act
+        exceptionCreator.throwException("New exception");
+
+        // Assert
 
     }
 }
