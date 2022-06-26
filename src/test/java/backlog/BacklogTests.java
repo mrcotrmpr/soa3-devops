@@ -21,21 +21,24 @@ import static org.testng.AssertJUnit.*;
 public class BacklogTests {
 
     Account scrumMaster = new ScrumMaster("testScrumMaster", 1, "test@email.com", "0612345678", "testUser");
-    Account productOwner = new ProductOwner("testProductOwner", 2, "test@email.com", "0612345678", "testUser");
+    Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+    Developer developer2 = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+    LeadDeveloper leadDeveloper = new LeadDeveloper("testDev", 1,"test@mial.com","01111111","tester45" );
+    Tester tester = new Tester("tester",1,"test@mial.com","01111111","tester45");
 
     @Test
     public void T2_1_backlog_item_can_be_created_with_correct_data(){
-        //Arrange
+        // Arrange
+        BacklogItem backlogItem = null;
 
         // Act
-
-        BacklogItem backlogItem = null;
         try {
             backlogItem = new BacklogItem("test backlog", 1, 2, 3);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //Assert
+
+        // Assert
         assertEquals(backlogItem.getDescription(),"test backlog");
         assertEquals(backlogItem.getValue(),1);
         assertEquals(backlogItem.getEstimate(),2);
@@ -44,85 +47,95 @@ public class BacklogTests {
 
     @Test
     public void T2_2_check_if_backlog_item_is_created_with_empty_activities(){
-        //Arrange
-
-        //Act
+        // Arrange
         BacklogItem backlogItem = null;
+
+        // Act
         try {
             backlogItem = new BacklogItem("test backlog", 1, 2, 3);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //Assert
+
+        // Assert
         assertEquals(backlogItem.getActivities(), Collections.emptyList() );
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void T2_3_1_check_if_backlog_item_cant_be_created_with_negative_values() throws Exception {
-        //Arrange
-
-        //Act
-
-        //Assert
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test backlog", -1, 2, 3);
+
+        // Act
+        boolean check = (backlogItem == null);
+
+        // Assert
+        assertTrue(check);
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void T2_3_2_check_if_backlog_item_cant_be_created_with_negative_values() throws Exception {
-        //Arrange
-
-        //Act
-
-        //Assert
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test backlog", 1, -1, 3);
+
+        // Act
+        boolean check = (backlogItem == null);
+
+        // Assert
+        assertTrue(check);
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void T2_3_3_check_if_backlog_item_cant_be_created_with_negative_values() throws Exception {
-        //Arrange
-
-        //Act
-
-        //Assert
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test backlog", 1, 2, -1);
+
+        // Act
+        boolean check = (backlogItem == null);
+
+        // Assert
+        assertTrue(check);
     }
     @Test
     public void T3_1_check_if_activities_ar_added_correctly_to_backlog_item() throws Exception {
-        //Arrange
+        // Arrange
         Activity activity = new Activity("test activity");
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
-        //Act
+
+        // Act
         backlogItem.addActivity(activity);
-        //Assert
+
+        // Assert
         assertEquals(backlogItem.getActivity(0), activity);
     }
     @Test
     public void T3_2_check_if_activities_are_returned_correct () throws Exception {
-        //Arrange
+        // Arrange
         Activity activity = new Activity("test activity");
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
+
         backlogItem.addActivity(activity);
-        //Act
+        // Act
         Activity activityRes = backlogItem.getActivity(0);
-        //Assert
+
+        // Assert
         assertEquals(activity, activityRes);
     }
     @Test
     public void T3_3_check_if_backlog_item_can_be_set_to_done_state() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-        //Act
+        // Act
         backlogItem.getState().changeToDoneState();
-        //Assert
+
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test
     public void F3_4_Check_if_done_state_can_be_changed_to_todo_state () throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         Activity activity = new Activity("test activity");
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.addActivity(activity);
@@ -133,16 +146,15 @@ public class BacklogTests {
         activity.completeActivity();
         backlogItem.getState().changeToDoneState();
 
-        //Act
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F3_5_check_if_backlog_item_cant_be_set_to_done_state_when_activities_arent_done () throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         Activity activity = new Activity("test activity");
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.addActivity(activity);
@@ -150,19 +162,17 @@ public class BacklogTests {
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-//        activity.completeActivity();
         backlogItem.getState().changeToDoneState();
 
-        //Act
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
     }
     @Test
     public void F3_6_check_if_backlog_item_can_be_changed_to_done_when_all_activities_are_done  () throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         Activity activity = new Activity("test activity");
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.addActivity(activity);
@@ -171,565 +181,557 @@ public class BacklogTests {
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-
-
-        //Act
+        // Act
         activity.completeActivity();
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test
     public void F4_1_check_if_a_developer_can_be_added_to_a_backlog_item () throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
-        Developer developer = new Developer("test", 1,"test@mial.com","01111111","tester45");
-        //Act
+        // Act
         backlogItem.setAssignedTo(developer);
-        //Assert
+        // Assert
         assertEquals(backlogItem.getAssignedTo(), developer);
     }
     @Test
     public void F5_1_check_if_a_second_developer_can_be_assigned_to_an_backlog_item() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
-        Developer developer = new Developer("test", 1,"test@mial.com","01111111","tester45");
-        Developer developer2 = new Developer("test2", 2,"test2@mial.com","01111112","tester46");
 
-        //Act
+        // Act
         backlogItem.setAssignedTo(developer);
         backlogItem.setAssignedTo(developer2);
-        //Assert
+
+        // Assert
         assertEquals(backlogItem.getAssignedTo(), developer2);
     }
     @Test
     public void F6_1_1_check_if_a_backlog_item_can_be_changed_from_todo_to_the_doing_state() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-        //Act
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_1_2_check_if_a_backlog_item_cant_be_changed_from_todo_to_the_ready_for_testing_state() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-
-        //Act
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_1_3_check_if_a_backlog_item_cant_be_changed_from_todo_to_the_testing_state() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-
-        //Act
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_1_4_check_if_a_backlog_item_cant_be_changed_from_todo_to_the_tested_state() throws Exception {
-        //Arrange
-
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-
-        //Act
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_1_5_check_if_a_backlog_item_cant_be_changed_from_todo_to_the_done_state() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-
-        //Act
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_2_1_check_if_a_backlog_item_can_be_changed_from_doing_to_the_todo() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_2_2_check_if_a_backlog_item_can_be_changed_from_doing_to_the_doing() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
     }
     @Test
     public void F6_2_3_check_if_a_backlog_item_can_be_changed_from_doing_to_the_RFT() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_2_4_check_if_a_backlog_item_can_be_changed_from_doing_to_the_testing() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_2_5_check_if_a_backlog_item_can_be_changed_from_doing_to_the_tested() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_2_5_check_if_a_backlog_item_can_be_changed_from_doing_to_the_done() throws Exception {
-        //Arrange
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test
     public void F6_3_1_check_if_a_backlog_item_can_be_changed_form_RFT_to_todo() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_3_2_check_if_a_backlog_item_can_be_changed_form_RFT_to_doing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_3_3_check_if_a_backlog_item_can_be_changed_form_RFT_to_RFT() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test
     public void F6_3_4_check_if_a_backlog_item_can_be_changed_form_RFT_to_Testing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestingState.class);
     }
     @Test
     public void F6_3_5_check_if_a_backlog_item_can_be_changed_form_RFT_to_Tested() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_3_6_check_if_a_backlog_item_can_be_changed_form_RFT_to_Done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test
     public void F6_4_1_check_if_a_backlog_item_can_be_changed_form_testing_to_todo() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_4_2_check_if_a_backlog_item_can_be_changed_form_testing_to_doing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_4_3_check_if_a_backlog_item_can_be_changed_form_testing_to_RFT() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_4_4_check_if_a_backlog_item_can_be_changed_form_testing_to_testing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestingState.class);
     }
     @Test
     public void F6_4_5_check_if_a_backlog_item_can_be_changed_form_testing_to_tested() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_4_6_check_if_a_backlog_item_can_be_changed_form_testing_to_Done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestingState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_5_1_check_if_a_backlog_item_can_be_changed_form_tested_to_todo() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_5_2_check_if_a_backlog_item_can_be_changed_form_tested_to_doing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_5_3_check_if_a_backlog_item_can_be_changed_form_tested_to_RFT() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_5_4_check_if_a_backlog_item_can_be_changed_form_tested_to_testing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_5_5_check_if_a_backlog_item_can_be_changed_form_tested_to_tested() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
     }
     @Test
     public void F6_5_6_check_if_a_backlog_item_can_be_changed_form_tested_to_done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test
     public void F6_6_1_check_if_a_backlog_item_can_be_changed_form_done_to_todo() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToToDoState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_6_2_check_if_a_backlog_item_can_be_changed_form_done_to_doing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_6_3_check_if_a_backlog_item_can_be_changed_form_done_to_RFT() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_6_4_check_if_a_backlog_item_can_be_changed_form_done_to_testing() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestingState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_6_5_check_if_a_backlog_item_can_be_changed_form_done_to_tested() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F6_6_6_check_if_a_backlog_item_can_be_changed_form_done_to_done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
         backlogItem.getState().changeToDoneState();
-        //Act
+
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test
     public void F6_4_check_if_a_backlog_item_can_be_changed_to_the_tested_state() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
 
-        //Act
+        // Act
         backlogItem.getState().changeToTestedState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(),TestedState.class);
     }
     @Test
     public void F6_5_check_if_a_backlog_item_can_be_changed_to_the_tested_state() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-        //Act
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
     }
     @Test
     public void F7_1_check_if_a_backlog_item_state_when_initialized_is_todo_state() throws Exception {
-        //Arrange
-
-
-        //Act
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
 
-        //Assert
-        assertEquals(backlogItem.getState().getClass(), ToDoState.class);
+        // Act
+        var res = backlogItem.getState().getClass();
+
+        // Assert
+        assertEquals(res, ToDoState.class);
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F8_9_1_check_if_backlog_item_cant_be_changed_to_done_state_when_0_out_2_activities_are_done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         Activity activity1 = new Activity("testActivity1");
         Activity activity2 = new Activity("testActivity2");
@@ -740,18 +742,16 @@ public class BacklogTests {
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-
-        //Act
+        // Act
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
 
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F8_9_2_check_if_backlog_item_cant_be_changed_to_done_state_when_1_out_2_activities_are_done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         Activity activity1 = new Activity("testActivity1");
         Activity activity2 = new Activity("testActivity2");
@@ -762,19 +762,17 @@ public class BacklogTests {
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-
-        //Act
+        // Act
         activity1.completeActivity();
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), TestedState.class);
 
     }
     @Test
     public void F8_9_3_check_if_backlog_item_can_be_changed_to_done_state_when_2_out_2_activities_are_done() throws Exception {
-        //Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         Activity activity1 = new Activity("testActivity1");
         Activity activity2 = new Activity("testActivity2");
@@ -785,20 +783,22 @@ public class BacklogTests {
         backlogItem.getState().changeToTestingState();
         backlogItem.getState().changeToTestedState();
 
-
-        //Act
+        // Act
         activity1.completeActivity();
         activity2.completeActivity();
         backlogItem.getState().changeToDoneState();
 
-        //Assert
+        // Assert
         assertEquals(backlogItem.getState().getClass(), DoneState.class);
 
     }
     @Test
     public void F10_11_1_check_if_all_states_are_being_changed() throws Exception {
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
+
+        // Act
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ToDoState.class);
         backlogItem.getState().changeToDoingState();
         assertEquals(backlogItem.getState().getClass(), DoingState.class);
@@ -814,38 +814,36 @@ public class BacklogTests {
     }
     @Test(expectedExceptions = ChangeBacklogStateException.class)
     public void F12_1_check_if_a_non_lead_developer_cant_change_state_from_tested_to_ready_for_testing() throws Exception {
-        //Assert
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
+
+        // Act
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
         backlogItem.getState().changeToTestedState();
-
-        //Act
         backlogItem.getState().changeToReadyForTestingState(developer);
-        //Assert
 
+        // Assert
+        assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
 
     }
     @Test
     public void F12_1_check_if_a_lead_developer_can_change_state_from_tested_to_ready_for_testing() throws Exception {
-        //Assert
-        LeadDeveloper developer = new LeadDeveloper("testDev", 1,"test@mial.com","01111111","tester45" );
+        // Arrange
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.getState().changeToDoingState();
-        backlogItem.getState().changeToReadyForTestingState(developer);
+        backlogItem.getState().changeToReadyForTestingState(leadDeveloper);
         backlogItem.getState().changeToTestedState();
 
-        //Act
-        backlogItem.getState().changeToReadyForTestingState(developer);
-        //Assert
+        // Act
+        backlogItem.getState().changeToReadyForTestingState(leadDeveloper);
+
+        // Assert
         assertEquals(backlogItem.getState().getClass(), ReadyForTestingState.class);
     }
     @Test
     public void F13_1_check_if_messages_isBeing_send_to_testers_when_backlog_item_is_set_to_ready_for_testing() throws Exception {
-        //Assert
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
-        Tester tester = new Tester("tester",1,"test@mial.com","01111111","tester45");
+        // Arrange
         NotificationService notificationService = new NotificationService(new SlackNotify());
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
         backlogItem.subscribe(tester,notificationService);
@@ -855,21 +853,19 @@ public class BacklogTests {
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
 
-        //Act
+        // Act
         backlogItem.getState().changeToReadyForTestingState(developer);
 
-        //Assert
+        // Assert
         assertTrue(os.toString().contains("Sent Slack message: Backlog item changed from doing to ready for testing"));
 
     }
     @Test
     public void F20_1_check_if_messages_isBeing_send_to_testers_when_backlog_item_is_set_to_ready_for_testing() throws Exception {
-        //Assert
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
-        ScrumMaster scrumMaster1 = new ScrumMaster("scrummaster",1,"test@mial.com","01111111","tester45");
+        // Arrange
         NotificationService notificationService = new NotificationService(new SlackNotify());
         BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
-        backlogItem.subscribe(scrumMaster1,notificationService);
+        backlogItem.subscribe(scrumMaster,notificationService);
         backlogItem.getState().changeToDoingState();
         backlogItem.getState().changeToReadyForTestingState(developer);
 
@@ -877,16 +873,18 @@ public class BacklogTests {
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
 
-        //Act
+        // Act
         backlogItem.getState().changeToToDoState();
-        //Assert
 
+        // Assert
         assertTrue(os.toString().contains("Sent Slack message: Change from ready to testing to doing"));
     }
 
     @Test
     public void test_privilige_check() {
         // Arrange
+        Account scrumMaster = new ScrumMaster("testScrumMaster", 1, "test@email.com", "0612345678", "testUser");
+        Account productOwner = new ProductOwner("testProductOwner", 2, "test@email.com", "0612345678", "testUser");
 
         // Act
         boolean resTrue = PriviligeCheck.checkPrivilege(productOwner, ProductOwner.class.toString());
