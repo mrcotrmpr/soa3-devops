@@ -1,4 +1,4 @@
-package sprint.States;
+package sprint.states;
 
 import sprint.*;
 import exceptions.ChangeSprintStateException;
@@ -18,7 +18,7 @@ public class InitialState implements ISprintState {
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        if(this.sprint.getType() == SprintType.Release && this.sprint.getPipeline() == null){
+        if(this.sprint.getType() == SprintType.release && this.sprint.getPipeline() == null){
             throw new ChangeSprintStateException("A release sprint needs a pipeline!!");
         } else {
             this.sprint.setState(new InProgressState(this.sprint));

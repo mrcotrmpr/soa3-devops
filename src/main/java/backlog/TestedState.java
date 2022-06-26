@@ -6,10 +6,10 @@ import exceptions.ChangeBacklogStateException;
 
 public class TestedState implements IBacklogItemState {
 
-    private BacklogItem _backlogItem;
+    private BacklogItem backlogItem;
 
     public TestedState(BacklogItem context) {
-        this._backlogItem = context;
+        this.backlogItem = context;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class TestedState implements IBacklogItemState {
 
     @Override
     public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
-        if(PriviligeCheck.CheckPrivilage(account, LeadDeveloper.class)){
-            this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
+        if(PriviligeCheck.checkPrivilege(account, LeadDeveloper.class.toString())){
+            this.backlogItem.setState(new ReadyForTestingState(this.backlogItem));
         }else{
             throw new ChangeBacklogStateException(account.getClass().toString()+" does not have permission to change back to ready for testing");
         }
@@ -44,9 +44,9 @@ public class TestedState implements IBacklogItemState {
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        if (this._backlogItem.activitiesDone()){
-            this._backlogItem.getThread().setActive(false);
-            this._backlogItem.setState(new DoneState(this._backlogItem));
+        if (this.backlogItem.activitiesDone()){
+            this.backlogItem.getThread().setActive(false);
+            this.backlogItem.setState(new DoneState(this.backlogItem));
         } else
         {
             throw new ChangeBacklogStateException("Can't change from Tested to Done because activities are not done!");

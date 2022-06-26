@@ -8,8 +8,8 @@ import pipeline.PipeLine;
 import pipeline.PipeLineManager;
 import project.IProject;
 import report.Report;
-import sprint.States.ISprintState;
-import sprint.States.InitialState;
+import sprint.states.ISprintState;
+import sprint.states.InitialState;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,19 +18,24 @@ import java.util.Map;
 
 public class Sprint {
 
-    public SprintType type;
-    public String name;
-    public Backlog backlog;
-    public Account scrumMaster;
-    public Account productOwner;
-    public List<Account> developers;
-    public List<Account> testers;
-    public IProject project;
-    public Date startTime;
-    public Date endTime;
-    public PipeLineManager pipeLineManager;
-    public ISprintState state;
-    public Report report;
+    private final SprintType type;
+    private String name;
+    private final Backlog backlog;
+    private final Account scrumMaster;
+    private final Account productOwner;
+    private final List<Account> developers;
+    private final List<Account> testers;
+    private final IProject project;
+    private Date startTime;
+    private Date endTime;
+    private final PipeLineManager pipeLineManager;
+
+    public PipeLineManager getPipeLineManager() {
+        return pipeLineManager;
+    }
+
+    private ISprintState state;
+    private Report report;
 
     public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
@@ -102,7 +107,7 @@ public class Sprint {
     }
 
     public void addPipeline(PipeLine pipeLine) {
-        if(this.getType() == SprintType.Release){
+        if(this.getType() == SprintType.release){
             this.pipeLineManager.addNewPipeline(pipeLine);
         }
     }

@@ -8,36 +8,20 @@ import account.Developer;
 import account.LeadDeveloper;
 import notification.NotificationService;
 import notification.SlackNotify;
-import project.IProject;
-import project.ProjectFactory;
-import sprint.SprintType;
 import exceptions.ChangeBacklogStateException;
-import nl.altindag.console.ConsoleCaptor;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 import static org.testng.AssertJUnit.*;
 
 public class BacklogTests {
 
-    ProjectFactory projectFactory = new ProjectFactory();
-
-    SprintType release = SprintType.Release;
-    SprintType review = SprintType.Review;
-    Backlog backlog = new Backlog();
     Account scrumMaster = new ScrumMaster("testScrumMaster", 1, "test@email.com", "0612345678", "testUser");
     Account productOwner = new ProductOwner("testProductOwner", 2, "test@email.com", "0612345678", "testUser");
-    ArrayList<Account> devs = new ArrayList<Account>();
-    ArrayList<Account> testers = new ArrayList<Account>();
-    IProject project = projectFactory.getProject("scrum", "Project 1");
-    Date date = new Date();
-    ConsoleCaptor consoleCaptor = new ConsoleCaptor();
 
     @Test
     public void T2_1_backlog_item_can_be_created_with_correct_data(){
@@ -52,10 +36,10 @@ public class BacklogTests {
             throw new RuntimeException(e);
         }
         //Assert
-        assertEquals(backlogItem.description,"test backlog");
-        assertEquals(backlogItem.value,1);
-        assertEquals(backlogItem.estimate,2);
-        assertEquals(backlogItem.priority,3);
+        assertEquals(backlogItem.getDescription(),"test backlog");
+        assertEquals(backlogItem.getValue(),1);
+        assertEquals(backlogItem.getEstimate(),2);
+        assertEquals(backlogItem.getPriority(),3);
     }
 
     @Test
@@ -70,7 +54,7 @@ public class BacklogTests {
             throw new RuntimeException(e);
         }
         //Assert
-        assertEquals(backlogItem.activities, Collections.emptyList() );
+        assertEquals(backlogItem.getActivities(), Collections.emptyList() );
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void T2_3_1_check_if_backlog_item_cant_be_created_with_negative_values() throws Exception {
@@ -903,11 +887,10 @@ public class BacklogTests {
     @Test
     public void test_privilige_check() {
         // Arrange
-        PriviligeCheck priviligeCheck = new PriviligeCheck();
 
         // Act
-        boolean resTrue = PriviligeCheck.CheckPrivilage(productOwner, ProductOwner.class);
-        boolean resFalse = PriviligeCheck.CheckPrivilage(scrumMaster, ProductOwner.class);
+        boolean resTrue = PriviligeCheck.checkPrivilege(productOwner, ProductOwner.class.toString());
+        boolean resFalse = PriviligeCheck.checkPrivilege(scrumMaster, ProductOwner.class.toString());
 
         // Assert
         assertTrue(resTrue);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Backlog {
-    public List<BacklogItem> backlogItems;
+    private final List<BacklogItem> backlogItems;
 
     public Backlog() {
         this.backlogItems = new ArrayList<>();

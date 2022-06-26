@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class DiscussionThread implements Publisher {
 
-    public TreeNode treeNode;
+    private final TreeNode treeNode;
     private boolean active;
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private int comments = 0;

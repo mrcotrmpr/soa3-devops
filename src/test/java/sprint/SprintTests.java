@@ -6,7 +6,7 @@ import notification.*;
 import pipeline.PipeLine;
 import project.ScrumProject;
 import report.Report;
-import sprint.States.*;
+import sprint.states.*;
 import exceptions.ChangeSprintStateException;
 import org.testng.annotations.Test;
 
@@ -22,8 +22,8 @@ import static org.testng.AssertJUnit.*;
 
 public class SprintTests {
 
-    SprintType release = SprintType.Release;
-    SprintType review = SprintType.Review;
+    SprintType release = SprintType.release;
+    SprintType review = SprintType.review;
     Backlog backlog = new Backlog();
     Account scrumMaster = new ScrumMaster("testScrumMaster", 1, "test@email.com", "0612345678", "testUser");
     Account productOwner = new ProductOwner("testProductOwner", 2, "test@email.com", "0612345678", "testUser");
@@ -776,7 +776,7 @@ public class SprintTests {
 
         assert(consoleCaptor.getStandardOutput()).isEmpty();
 
-        sprint.pipeLineManager.executePipeLineByName("pipeline");
+        sprint.getPipeLineManager().executePipeLineByName("pipeline");
         sprint.getState().changeToReleaseSuccessState();
 
         // Assert

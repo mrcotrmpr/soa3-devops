@@ -1,8 +1,6 @@
 package pipeline;
 
 public class PrintVisitor extends Visitor {
-    public PrintVisitor() {
-    }
 
     @Override
     public void visitPipeline(PipeLine pipeLine) {
