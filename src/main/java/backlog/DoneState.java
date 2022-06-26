@@ -5,10 +5,14 @@ import exceptions.ChangeBacklogStateException;
 
 public class DoneState implements IBacklogItemState {
 
-    private BacklogItem backlogItem;
+    private final BacklogItem backlogItem;
 
     public DoneState(BacklogItem context) {
         this.backlogItem = context;
+    }
+
+    private void throwException(String msg) throws ChangeBacklogStateException {
+        throw new ChangeBacklogStateException(msg);
     }
 
     @Override
@@ -19,26 +23,26 @@ public class DoneState implements IBacklogItemState {
 
     @Override
     public void changeToDoingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Done to Doing!");
+        throwException("Can't change from Done to Doing!");
     }
 
     @Override
     public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Done to ReadyForTesting!");
+        throwException("Can't change from Done to ReadyForTesting!");
     }
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Done to Testing!");
+        throwException("Can't change from Done to Testing!");
     }
 
     @Override
     public void changeToTestedState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Done to Tested!");
+        throwException("Can't change from Done to Tested!");
     }
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from Done to Done!");
+        throwException("Can't change from Done to Done!");
     }
 }
