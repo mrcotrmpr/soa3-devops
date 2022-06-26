@@ -13,7 +13,7 @@ public class ToDoState implements IBacklogItemState {
 
     @Override
     public void changeToToDoState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from ToDo to ToDo");
+        ErrorHandler.throwChangeStateError("Can't change from ToDo to ToDo");
     }
 
     @Override
@@ -23,21 +23,22 @@ public class ToDoState implements IBacklogItemState {
 
     @Override
     public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from ToDo to ReadyForTesting!");
+        ErrorHandler.throwChangeStateError("CCan't change from ToDo to ReadyForTesting!");
     }
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
+        ErrorHandler.throwChangeStateError("Can't change from ToDo to Testing!");
         throw new ChangeBacklogStateException("Can't change from ToDo to Testing!");
     }
 
     @Override
     public void changeToTestedState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from ToDo to Tested!");
+        ErrorHandler.throwChangeStateError("Can't change from ToDo to Tested!");
     }
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException("Can't change from ToDo to ReadyForTesting!");
+        ErrorHandler.throwChangeStateError("Can't change from ToDo to ReadyForTesting!");
     }
 }
