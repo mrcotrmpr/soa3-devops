@@ -6,7 +6,7 @@ import exceptions.ChangeSprintStateException;
 public class ReleasingState implements ISprintState {
 
     private final Sprint sprint;
-    private final static String releasingStateMsg = "Can't change state while releasing!";
+    private final static String RELEASING = "Can't change state while releasing!";
 
     public ReleasingState(Sprint sprint) {
         this.sprint = sprint;
@@ -14,27 +14,27 @@ public class ReleasingState implements ISprintState {
 
     @Override
     public void changeToInitialState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 
     @Override
     public void changeToFinishedState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 
     @Override
     public void changeToReleasingState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 
     @Override
     public void changeToReleaseCancelledState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 
     @Override
@@ -54,6 +54,6 @@ public class ReleasingState implements ISprintState {
 
     @Override
     public void changeToReviewedState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException(releasingStateMsg);
+        throw new ChangeSprintStateException(RELEASING);
     }
 }
