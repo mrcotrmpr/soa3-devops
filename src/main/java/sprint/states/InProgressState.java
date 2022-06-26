@@ -11,14 +11,18 @@ public class InProgressState implements ISprintState {
         this.sprint = sprint;
     }
 
+    private void throwSprintException(String msg) throws ChangeSprintStateException {
+        throw new ChangeSprintStateException(msg);
+    }
+
     @Override
     public void changeToInitialState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to inital!");
+        throwSprintException("Can't change from in progress to inital!");
     }
 
     @Override
     public void changeToInProgressState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to in progress!");
+        throwSprintException("Can't change from in progress to in progress!");
     }
 
     @Override
@@ -28,26 +32,26 @@ public class InProgressState implements ISprintState {
 
     @Override
     public void changeToReleasingState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to releasing!");
+        throwSprintException("Can't change from in progress to releasing!");
     }
 
     @Override
     public void changeToReleaseCancelledState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to release cancelled!");
+        throwSprintException("Can't change from in progress to release cancelled!");
     }
 
     @Override
     public void changeToReleaseErrorState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to release error!");
+        throwSprintException("Can't change from in progress to release error!");
     }
 
     @Override
     public void changeToReleaseSuccessState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to release success!");
+        throwSprintException("Can't change from in progress to release success!");
     }
 
     @Override
     public void changeToReviewedState() throws ChangeSprintStateException {
-        throw new ChangeSprintStateException("Can't change from in progress to reviewed!");
+        throwSprintException("Can't change from in progress to reviewed!");
     }
 }
