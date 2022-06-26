@@ -1,6 +1,7 @@
 package backlog;
 
 import account.Account;
+import backlog.exceptions.ExceptionCreator;
 import exceptions.ChangeBacklogStateException;
 
 public class DoneState implements IBacklogItemState {
@@ -10,10 +11,7 @@ public class DoneState implements IBacklogItemState {
     public DoneState(BacklogItem context) {
         this.backlogItem = context;
     }
-
-    private void throwException(String msg) throws ChangeBacklogStateException {
-        throw new ChangeBacklogStateException(msg);
-    }
+    private final ExceptionCreator exceptionCreator = new ExceptionCreator();
 
     @Override
     public void changeToToDoState() {
@@ -23,26 +21,26 @@ public class DoneState implements IBacklogItemState {
 
     @Override
     public void changeToDoingState() throws ChangeBacklogStateException {
-        throwException("Can't change from Done to Doing!");
+        exceptionCreator.throwException("Can't change from Done to Doing!");
     }
 
     @Override
     public void changeToReadyForTestingState(Account account) throws ChangeBacklogStateException {
-        throwException("Can't change from Done to ReadyForTesting!");
+        exceptionCreator.throwException("Can't change from Done to ReadyForTesting!");
     }
 
     @Override
     public void changeToTestingState() throws ChangeBacklogStateException {
-        throwException("Can't change from Done to Testing!");
+        exceptionCreator.throwException("Can't change from Done to Testing!");
     }
 
     @Override
     public void changeToTestedState() throws ChangeBacklogStateException {
-        throwException("Can't change from Done to Tested!");
+        exceptionCreator.throwException("Can't change from Done to Tested!");
     }
 
     @Override
     public void changeToDoneState() throws ChangeBacklogStateException {
-        throwException("Can't change from Done to Done!");
+        exceptionCreator.throwException("Can't change from Done to Done!");
     }
 }
