@@ -896,21 +896,4 @@ public class BacklogTests {
         assertTrue(resTrue);
         assertFalse(resFalse);
     }
-
-    @Test(expectedExceptions = ChangeBacklogStateException.class)
-    public void test_test() throws ChangeBacklogStateException {
-        // Arrange
-        Developer developer = new Developer("testDev", 1,"test@mial.com","01111111","tester45" );
-        BacklogItem backlogItem = new BacklogItem("test item",1,2,3);
-
-        // Act
-        backlogItem.getState().changeToDoingState();
-        backlogItem.getState().changeToReadyForTestingState(developer);
-        backlogItem.getState().changeToTestingState();
-        backlogItem.getState().changeToTestedState();
-        backlogItem.getState().changeToDoneState();
-        backlogItem.getState().changeToDoingState();
-
-        // Assert
-    }
 }
