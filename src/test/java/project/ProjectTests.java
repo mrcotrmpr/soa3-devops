@@ -51,7 +51,7 @@ public class ProjectTests {
         ScrumProject project = (ScrumProject) projectFactory.getProject("scrum", "ThirdProject");
         project.setProductOwner(productOwner);
 
-        Sprint newSprint = new Sprint(SprintType.Release,"Sprint 1", sprintBacklog, scrumMaster,
+        Sprint newSprint = new Sprint(SprintType.release,"Sprint 1", sprintBacklog, scrumMaster,
                 productOwner, new ArrayList<>(), new ArrayList<>(), project, new Date(), new Date());
 
         //Act

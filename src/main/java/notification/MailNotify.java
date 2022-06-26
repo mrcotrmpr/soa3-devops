@@ -2,7 +2,7 @@ package notification;
 
 public class MailNotify implements INotifier{
 
-    public MailLib adaptor;
+    private final MailLib adaptor;
 
     public MailNotify(){
         this.adaptor = new MailLib();

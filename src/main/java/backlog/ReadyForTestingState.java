@@ -6,16 +6,16 @@ import exceptions.ChangeBacklogStateException;
 public class ReadyForTestingState implements IBacklogItemState {
 
 
-    private BacklogItem _backlogItem;
+    private BacklogItem backlogItem;
 
     public ReadyForTestingState(BacklogItem context) {
-        this._backlogItem = context;
+        this.backlogItem = context;
     }
 
     @Override
     public void changeToToDoState()  {
-        this._backlogItem.setState(new ToDoState(this._backlogItem));
-        this._backlogItem.notifySpecificSubscribers("ScrumMaster", "Change from ready to testing to doing");
+        this.backlogItem.setState(new ToDoState(this.backlogItem));
+        this.backlogItem.notifySpecificSubscribers("ScrumMaster", "Change from ready to testing to doing");
     }
 
     @Override
@@ -30,12 +30,12 @@ public class ReadyForTestingState implements IBacklogItemState {
 
     @Override
     public void changeToTestingState() {
-        this._backlogItem.setState(new TestingState(this._backlogItem));
+        this.backlogItem.setState(new TestingState(this.backlogItem));
     }
 
     @Override
     public void changeToTestedState() {
-            this._backlogItem.setState(new TestedState(this._backlogItem));
+            this.backlogItem.setState(new TestedState(this.backlogItem));
     }
 
     @Override

@@ -3,6 +3,7 @@ package scm;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -16,7 +17,7 @@ public class SCMTests {
         // Act
         String name = branch.getName();
         int id = branch.getId();
-        ArrayList<Commit> commits = branch.getCommits();
+        List<Commit> commits = branch.getCommits();
 
         // Assert
         assertEquals(name, "dev");
@@ -32,7 +33,7 @@ public class SCMTests {
         // Act
         String msg = commit.getMessage();
         int id = commit.getId();
-        ArrayList<String> files = commit.getFiles();
+        List<String> files = commit.getFiles();
 
         // Assert
         assertEquals(msg, "Initial commit");

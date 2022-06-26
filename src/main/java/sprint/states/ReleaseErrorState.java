@@ -1,4 +1,4 @@
-package sprint.States;
+package sprint.states;
 
 import sprint.Sprint;
 import exceptions.ChangeSprintStateException;
@@ -6,6 +6,7 @@ import exceptions.ChangeSprintStateException;
 public class ReleaseErrorState implements ISprintState {
 
     private final Sprint sprint;
+    private final static String releaseCancelled = "Sprint release has been cancelled";
 
     public ReleaseErrorState(Sprint sprint) {
         this.sprint = sprint;
@@ -34,9 +35,9 @@ public class ReleaseErrorState implements ISprintState {
 
     @Override
     public void changeToReleaseCancelledState(){
-        this.sprint.notifySpecificSubscribers("ScrumMaster", "Sprint release has been cancelled");
-        this.sprint.notifySpecificSubscribers("ProductOwner", "Sprint release has been cancelled");
-        System.out.println("Sprint release has been cancelled");
+        this.sprint.notifySpecificSubscribers("ScrumMaster", releaseCancelled);
+        this.sprint.notifySpecificSubscribers("ProductOwner", releaseCancelled);
+        System.out.println(releaseCancelled);
         this.sprint.setState(new ReleaseCancelledState(this.sprint));
     }
 

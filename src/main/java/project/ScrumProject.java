@@ -5,13 +5,14 @@ import backlog.Backlog;
 import sprint.Sprint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScrumProject implements IProject {
 
-    public Backlog projectBacklog;
-    public Account productOwner;
-    public ArrayList<Sprint> sprints;
-    public String name;
+    private final Backlog projectBacklog;
+    private Account productOwner;
+    private final List<Sprint> sprints;
+    private final String name;
 
     public void setProductOwner(Account productOwner) {
         this.productOwner = productOwner;
@@ -31,7 +32,7 @@ public class ScrumProject implements IProject {
         return name;
     }
 
-    public ArrayList<Sprint> getSprints() {
+    public List<Sprint> getSprints() {
         return sprints;
     }
 

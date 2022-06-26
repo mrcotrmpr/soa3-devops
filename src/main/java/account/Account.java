@@ -8,7 +8,7 @@ public abstract class Account {
     private final  String phoneNUmber;
     private final  String slackUsername;
 
-    public Account(String name, int employeeNumber, String email, String phoneNUmber, String slackUsername) {
+    protected Account(String name, int employeeNumber, String email, String phoneNUmber, String slackUsername) {
         this.name = name;
         this.employeeNumber = employeeNumber;
         this.email = email;

@@ -2,7 +2,7 @@ package notification;
 
 public class NotificationService implements Subscriber {
 
-    public INotifier notifier;
+    private final INotifier notifier;
 
     public NotificationService(INotifier notifier) {
         this.notifier = notifier;

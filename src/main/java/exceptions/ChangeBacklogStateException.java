@@ -1,5 +1,6 @@
 package exceptions;
 
+
 public class ChangeBacklogStateException extends Exception {
 
     public ChangeBacklogStateException(String message) {

@@ -2,6 +2,7 @@ package backlog;
 
 import account.Account;
 import account.Developer;
+import com.sun.jdi.InvalidTypeException;
 import notification.Subscriber;
 import forum.DiscussionThread;
 
@@ -12,19 +13,23 @@ import java.util.Map;
 
 public class BacklogItem {
 
-    public String description;
-    public int value;
-    public int estimate;
-    public int priority;
-    public List<Activity> activities;
-    public Developer assignedTo;
+    private String description;
+    private int value;
+    private int estimate;
+    private int priority;
+    private final List<Activity> activities;
+    private Developer assignedTo;
     private final DiscussionThread thread;
 
     public IBacklogItemState state;
 
     public Map<Account, Subscriber> subscribers = new HashMap<Account, Subscriber>();
 
-    public BacklogItem(String description, int value, int estimate, int priority) throws Exception {
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public BacklogItem(String description, int value, int estimate, int priority) throws InvalidTypeException {
         if(value<= 0){
             throw new IllegalArgumentException ("Value cant be null or negative");
         }
@@ -39,7 +44,7 @@ public class BacklogItem {
         this.estimate = estimate;
         this.priority = priority;
         this.state = new ToDoState(this);
-        this.activities = new ArrayList<Activity>();
+        this.activities = new ArrayList<>();
         this.thread = new DiscussionThread(this.description);
     }
 
@@ -64,7 +69,7 @@ public class BacklogItem {
 
     public boolean activitiesDone() {
         for (Activity activity : activities) {
-            if (!activity.getDone()) {
+            if (Boolean.FALSE.equals(activity.getDone())) {
                 return false;
             }
         }

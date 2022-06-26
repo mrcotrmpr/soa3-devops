@@ -5,10 +5,10 @@ import exceptions.ChangeBacklogStateException;
 
 public class DoingState implements IBacklogItemState {
 
-    private BacklogItem _backlogItem;
+    private BacklogItem backlogItem;
 
     public DoingState(BacklogItem context) {
-        this._backlogItem = context;
+        this.backlogItem = context;
     }
 
     @Override
@@ -24,9 +24,9 @@ public class DoingState implements IBacklogItemState {
 
     @Override
     public void changeToReadyForTestingState(Account account) {
-        this._backlogItem.setState(new ReadyForTestingState(this._backlogItem));
+        this.backlogItem.setState(new ReadyForTestingState(this.backlogItem));
 
-        this._backlogItem.notifySpecificSubscribers("Tester", "Backlog item changed from doing to ready for testing");
+        this.backlogItem.notifySpecificSubscribers("Tester", "Backlog item changed from doing to ready for testing");
 
     }
 

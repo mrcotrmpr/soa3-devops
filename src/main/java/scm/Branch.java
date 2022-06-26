@@ -1,12 +1,13 @@
 package scm;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Branch {
 
     private final int id;
     private String name;
-    private final ArrayList<Commit> commits;
+    private final List<Commit> commits;
 
     public Branch(int id, String name) {
         this.id = id;
@@ -26,7 +27,7 @@ public class Branch {
         this.name = name;
     }
 
-    public ArrayList<Commit> getCommits() {
+    public List<Commit> getCommits() {
         return commits;
     }
 

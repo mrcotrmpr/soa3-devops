@@ -2,8 +2,8 @@ package backlog;
 
 public class Activity {
 
-    public String description;
-    public Boolean done;
+    private final String description;
+    private Boolean done;
 
     public Activity(String description) {
         this.description = description;

@@ -1,11 +1,11 @@
-package sprint.States;
+package sprint.states;
 
 import sprint.Sprint;
 import exceptions.ChangeSprintStateException;
 
 public class ReleaseCancelledState implements ISprintState {
 
-    private final String releaseCancelled = "Release cancelled is a final state!";
+    private final static String releaseCancelled = "Release cancelled is a final state!";
 
     public ReleaseCancelledState(Sprint sprint) {
     }

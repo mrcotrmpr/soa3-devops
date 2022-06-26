@@ -1,14 +1,14 @@
 package scm;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Commit {
 
     private final int id;
     private final String message;
-    private ArrayList<String> files;
+    private List<String> files;
 
-    public Commit(int id, String message, ArrayList<String> files) {
+    public Commit(int id, String message, List<String> files) {
         this.id = id;
         this.message = message;
         this.files = files;
@@ -22,7 +22,7 @@ public class Commit {
         return message;
     }
 
-    public ArrayList<String> getFiles() {
+    public List<String> getFiles() {
         return files;
     }
 

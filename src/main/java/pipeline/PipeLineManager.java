@@ -8,10 +8,10 @@ import java.util.List;
 
 public class PipeLineManager implements Publisher {
 
-    private List<PipeLine> pipeLines;
+    private final List<PipeLine> pipeLines;
 
     public PipeLineManager() {
-        this.pipeLines = new ArrayList<PipeLine>();
+        this.pipeLines = new ArrayList<>();
         this.pipeLines.add(generateBasePipeLine("DefaultDevPipeLine"));
         this.pipeLines.add(generateDefaultDeployPipeLine());
     }
