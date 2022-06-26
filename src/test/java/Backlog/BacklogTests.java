@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.AssertJUnit.*;
 
 public class BacklogTests {
 
@@ -885,6 +884,21 @@ public class BacklogTests {
         //Assert
 
         assertTrue(os.toString().contains("Sent Slack message: Change from ready to testing to doing"));
+    }
+
+    @Test
+    public void test_privilige_check() {
+        // Arrange
+        PriviligeCheck priviligeCheck = new PriviligeCheck();
+
+        // Act
+        boolean resTrue = PriviligeCheck.CheckPrivilage(productOwner, ProductOwner.class);
+        boolean resFalse = PriviligeCheck.CheckPrivilage(scrumMaster, ProductOwner.class);
+
+        // Assert
+        assertTrue(resTrue);
+        assertFalse(resFalse);
+
     }
 
 }

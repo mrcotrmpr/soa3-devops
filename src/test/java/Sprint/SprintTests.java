@@ -143,6 +143,156 @@ public class SprintTests {
         assertEquals(releaseSuccessState.getClass(), ReleaseSuccessState.class);
     }
 
+    @Test(expectedExceptions = ChangeSprintStateException.class)
+    public void T16_4_sprint_state_can_not_be_altered_from_cancelled_to_anything() throws ChangeSprintStateException, InterruptedException {
+        // Arrange
+        Sprint sprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+
+        // Act
+        sprint.getState().changeToInProgressState();
+        sprint.getState().changeToFinishedState();
+        sprint.getState().changeToReleaseCancelledState();
+
+        sprint.getState().changeToInitialState();
+        ISprintState initial = sprint.getState();
+        sprint.getState().changeToInProgressState();
+        ISprintState inProgress = sprint.getState();
+        sprint.getState().changeToFinishedState();
+        ISprintState finished = sprint.getState();
+        sprint.getState().changeToReleasingState();
+        ISprintState releasing = sprint.getState();
+        sprint.getState().changeToReleaseCancelledState();
+        ISprintState cancelled = sprint.getState();
+        sprint.getState().changeToReleaseErrorState();
+        ISprintState error = sprint.getState();
+        sprint.getState().changeToReleaseSuccessState();
+        ISprintState success = sprint.getState();
+        sprint.getState().changeToReviewedState();
+        ISprintState reviewed = sprint.getState();
+
+        assertEquals(initial.getClass(), ReleaseCancelledState.class);
+        assertEquals(inProgress.getClass(), ReleaseCancelledState.class);
+        assertEquals(finished.getClass(), ReleaseCancelledState.class);
+        assertEquals(releasing.getClass(), ReleaseCancelledState.class);
+        assertEquals(cancelled.getClass(), ReleaseCancelledState.class);
+        assertEquals(error.getClass(), ReleaseCancelledState.class);
+        assertEquals(success.getClass(), ReleaseCancelledState.class);
+        assertEquals(reviewed.getClass(), ReleaseCancelledState.class);
+    }
+
+    @Test(expectedExceptions = ChangeSprintStateException.class)
+    public void T16_5_sprint_state_can_not_be_altered_from_reviewed_to_anything() throws ChangeSprintStateException, InterruptedException {
+        // Arrange
+        Sprint sprint = new Sprint(review,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+
+        // Act
+        sprint.getState().changeToInProgressState();
+        sprint.getState().changeToFinishedState();
+        sprint.addReport(new Report());
+        sprint.getState().changeToReviewedState();
+
+        sprint.getState().changeToInitialState();
+        ISprintState initial = sprint.getState();
+        sprint.getState().changeToInProgressState();
+        ISprintState inProgress = sprint.getState();
+        sprint.getState().changeToFinishedState();
+        ISprintState finished = sprint.getState();
+        sprint.getState().changeToReleasingState();
+        ISprintState releasing = sprint.getState();
+        sprint.getState().changeToReleaseCancelledState();
+        ISprintState cancelled = sprint.getState();
+        sprint.getState().changeToReleaseErrorState();
+        ISprintState error = sprint.getState();
+        sprint.getState().changeToReleaseSuccessState();
+        ISprintState success = sprint.getState();
+        sprint.getState().changeToReviewedState();
+        ISprintState reviewed = sprint.getState();
+
+        assertEquals(initial.getClass(), ReviewedState.class);
+        assertEquals(inProgress.getClass(), ReviewedState.class);
+        assertEquals(finished.getClass(), ReviewedState.class);
+        assertEquals(releasing.getClass(), ReviewedState.class);
+        assertEquals(cancelled.getClass(), ReviewedState.class);
+        assertEquals(error.getClass(), ReviewedState.class);
+        assertEquals(success.getClass(), ReviewedState.class);
+        assertEquals(reviewed.getClass(), ReviewedState.class);
+    }
+
+    @Test(expectedExceptions = ChangeSprintStateException.class)
+    public void T16_6_sprint_state_can_not_be_altered_from_success_to_anything() throws ChangeSprintStateException, InterruptedException {
+        // Arrange
+        Sprint sprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+
+        // Act
+        sprint.getState().changeToInProgressState();
+        sprint.getState().changeToFinishedState();
+        sprint.getState().changeToReleasingState();
+        sprint.getState().changeToReleaseSuccessState();
+
+        sprint.getState().changeToInitialState();
+        ISprintState initial = sprint.getState();
+        sprint.getState().changeToInProgressState();
+        ISprintState inProgress = sprint.getState();
+        sprint.getState().changeToFinishedState();
+        ISprintState finished = sprint.getState();
+        sprint.getState().changeToReleasingState();
+        ISprintState releasing = sprint.getState();
+        sprint.getState().changeToReleaseCancelledState();
+        ISprintState cancelled = sprint.getState();
+        sprint.getState().changeToReleaseErrorState();
+        ISprintState error = sprint.getState();
+        sprint.getState().changeToReleaseSuccessState();
+        ISprintState success = sprint.getState();
+        sprint.getState().changeToReviewedState();
+        ISprintState reviewed = sprint.getState();
+
+        assertEquals(initial.getClass(), ReleaseSuccessState.class);
+        assertEquals(inProgress.getClass(), ReleaseSuccessState.class);
+        assertEquals(finished.getClass(), ReleaseSuccessState.class);
+        assertEquals(releasing.getClass(), ReleaseSuccessState.class);
+        assertEquals(cancelled.getClass(), ReleaseSuccessState.class);
+        assertEquals(error.getClass(), ReleaseSuccessState.class);
+        assertEquals(success.getClass(), ReleaseSuccessState.class);
+        assertEquals(reviewed.getClass(), ReleaseSuccessState.class);
+    }
+
+    @Test(expectedExceptions = ChangeSprintStateException.class)
+    public void T16_7_sprint_state_can_not_be_altered_from_releasing_to_anything() throws ChangeSprintStateException, InterruptedException {
+        // Arrange
+        Sprint sprint = new Sprint(release,"Sprint 1", backlog, scrumMaster, productOwner, devs, testers, project, date, date);
+
+        // Act
+        sprint.getState().changeToInProgressState();
+        sprint.getState().changeToFinishedState();
+        sprint.getState().changeToReleasingState();
+
+        sprint.getState().changeToInitialState();
+        ISprintState initial = sprint.getState();
+        sprint.getState().changeToInProgressState();
+        ISprintState inProgress = sprint.getState();
+        sprint.getState().changeToFinishedState();
+        ISprintState finished = sprint.getState();
+        sprint.getState().changeToReleasingState();
+        ISprintState releasing = sprint.getState();
+        sprint.getState().changeToReleaseCancelledState();
+        ISprintState cancelled = sprint.getState();
+        sprint.getState().changeToReleaseErrorState();
+        ISprintState error = sprint.getState();
+        sprint.getState().changeToReleaseSuccessState();
+        ISprintState success = sprint.getState();
+        sprint.getState().changeToReviewedState();
+        ISprintState reviewed = sprint.getState();
+
+        assertEquals(initial.getClass(), ReleasingState.class);
+        assertEquals(inProgress.getClass(), ReleasingState.class);
+        assertEquals(finished.getClass(), ReleasingState.class);
+        assertEquals(releasing.getClass(), ReleasingState.class);
+        assertEquals(cancelled.getClass(), ReleasingState.class);
+        assertEquals(error.getClass(), ReleasingState.class);
+        assertEquals(success.getClass(), ReleasingState.class);
+        assertEquals(reviewed.getClass(), ReleasingState.class);
+    }
+
     @Test
     public void T17_1_sprint_data_can_be_altered_in_initial_state(){
         // Arrange
