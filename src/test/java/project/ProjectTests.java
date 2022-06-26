@@ -20,16 +20,18 @@ public class ProjectTests {
     @Test
     public void T_1_1_scrum_project_is_created_with_valid_data(){
         // Arrange
-        IProject project = projectFactory.getProject("scrum", "FirstProject");
+        ScrumProject project = (ScrumProject) projectFactory.getProject("scrum", "FirstProject");
         project.setProductOwner(productOwner);
 
         //Act
         Account productOwner = project.getProductOwner();
         String name = project.getName();
+        int items = project.getProjectBacklog().getBacklogItems().size();
 
         //Assert
         assertEquals(name, "FirstProject");
         assertEquals(productOwner.getName(), "Name");
+        assertEquals(items, 0);
     }
 
     @Test

@@ -18,6 +18,10 @@ public class ScrumProject implements IProject {
         this.productOwner = productOwner;
     }
 
+    public Backlog getProjectBacklog() {
+        return projectBacklog;
+    }
+
     public ScrumProject(String name) {
         this.name = name;
         this.sprints = new ArrayList<>();

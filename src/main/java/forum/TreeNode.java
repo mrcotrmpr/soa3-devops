@@ -5,13 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TreeNode {
+
     private TreeNode parent = null;
     private List<TreeNode> children = null;
     private Comment comment;
 
     public TreeNode(Comment comment) {
         this.parent = null;
-        this.children = new ArrayList<TreeNode>();
+        this.children = new ArrayList<>();
         this.comment = comment;
     }
 
