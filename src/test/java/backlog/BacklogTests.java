@@ -895,7 +895,5 @@ public class BacklogTests {
         // Assert
         assertTrue(resTrue);
         assertFalse(resFalse);
-
     }
-
 }
