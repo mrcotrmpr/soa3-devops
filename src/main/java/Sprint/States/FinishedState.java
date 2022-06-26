@@ -5,7 +5,7 @@ import exceptions.ChangeSprintStateException;
 
 public class FinishedState implements ISprintState {
 
-    private Sprint sprint;
+    private final Sprint sprint;
 
     public FinishedState(Sprint sprint) {
         this.sprint = sprint;
