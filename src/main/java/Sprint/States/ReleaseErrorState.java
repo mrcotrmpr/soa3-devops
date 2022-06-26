@@ -5,7 +5,7 @@ import exceptions.ChangeSprintStateException;
 
 public class ReleaseErrorState implements ISprintState {
 
-    private Sprint sprint;
+    private final Sprint sprint;
 
     public ReleaseErrorState(Sprint sprint) {
         this.sprint = sprint;
